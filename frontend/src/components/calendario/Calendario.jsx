@@ -7,6 +7,26 @@ const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
 function Calendario({ selectedDate, setSelectedDate }) {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [diasComPresenca, setDiasComPresenca] = useState([]);
+
+  useEffect(() => {
+    const carregarDiasComPresenca = async () => {
+      const ano = currentDate.getFullYear();
+      const mes = currentDate.getMonth() + 1;
+      
+      try {
+        const response = await fetch(`http://localhost:8000/dias-com-presenca/${mes}/${ano}`);
+        if (response.ok) {
+          const dias = await response.json();
+          setDiasComPresenca(dias);
+        }
+      } catch (error) {
+        console.error('Erro ao carregar dias com presença:', error);
+      }
+    };
+    
+    carregarDiasComPresenca();
+  }, [currentDate]);
 
   const getDays = () => {
     const year = currentDate.getFullYear();
@@ -32,6 +52,8 @@ function Calendario({ selectedDate, setSelectedDate }) {
   
   const isSelected = (day, curr) => curr && selectedDate.getDate() === day && 
     selectedDate.getMonth() === currentDate.getMonth() && selectedDate.getFullYear() === currentDate.getFullYear();
+  
+  const hasPresenca = (day) => diasComPresenca.includes(day);
 
   const days = getDays();
 
@@ -57,7 +79,7 @@ function Calendario({ selectedDate, setSelectedDate }) {
       <div className='calendario-grid'>
         {weekDays.map(d => <div key={d} className='calendario-weekday'>{d}</div>)}
         {days.map((d, i) => (
-          <div key={i} className={`calendario-day ${!d.curr ? 'other-month' : ''} ${isSelected(d.day, d.curr) ? 'selected' : ''}`}
+          <div key={i} className={`calendario-day ${!d.curr ? 'other-month' : ''} ${isSelected(d.day, d.curr) ? 'selected' : ''} ${d.curr && hasPresenca(d.day) ? 'com-presenca' : ''}`}
             onClick={() => selectDay(d.day, d.curr)}>{d.day}</div>
         ))}
       </div>

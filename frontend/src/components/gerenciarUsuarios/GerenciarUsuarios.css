@@ -1,0 +1,224 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.btn-close:hover {
+  color: #ff6b35;
+}
+
+.modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.form-adicionar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-adicionar input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-adicionar input:focus {
+  border-color: #ff9b7a;
+  box-shadow: 0 0 0 3px rgba(255, 155, 122, 0.1);
+}
+
+.btn-adicionar {
+  padding: 0.75rem 1.5rem;
+  background: #ff9b7a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.btn-adicionar:hover {
+  background: #ff8861;
+}
+
+.lista-usuarios {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.usuario-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.usuario-item.inativo {
+  opacity: 0.6;
+}
+
+.nome-usuario {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status.ativo {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.inativo {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.acoes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.acoes button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.btn-editar {
+  background: #3498db;
+  color: white;
+}
+
+.btn-editar:hover {
+  background: #2980b9;
+}
+
+.btn-desativar {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-desativar:hover {
+  background: #c0392b;
+}
+
+.btn-ativar {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-ativar:hover {
+  background: #229954;
+}
+
+.input-editar {
+  flex: 1;
+  padding: 0.5rem;
+  border: 2px solid #3498db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.btn-salvar {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background: #229954;
+}
+
+.btn-cancelar {
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background: #7f8c8d;
+}
+
+.btn-deletar-permanente {
+  background: #8B0000;
+  color: white;
+}
+
+.btn-deletar-permanente:hover {
+  background: #A52A2A;
+  transform: scale(1.05);
+}

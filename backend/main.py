@@ -45,6 +45,16 @@ def atualizar_pessoa(pessoa_id: int, ativo: bool, db: Session = Depends(get_db))
     db.refresh(pessoa)
     return pessoa
 
+@app.patch("/pessoas/{pessoa_id}/nome", response_model=models.PessoaResponse)
+def atualizar_nome_pessoa(pessoa_id: int, nome: str, db: Session = Depends(get_db)):
+    pessoa = db.query(models.Pessoa).filter(models.Pessoa.id == pessoa_id).first()
+    if not pessoa:
+        raise HTTPException(status_code=404, detail="Pessoa não encontrada")
+    pessoa.nome = nome
+    db.commit()
+    db.refresh(pessoa)
+    return pessoa
+
 @app.delete("/pessoas/{pessoa_id}")
 def deletar_pessoa(pessoa_id: int, db: Session = Depends(get_db)):
     pessoa = db.query(models.Pessoa).filter(models.Pessoa.id == pessoa_id).first()
@@ -86,6 +96,23 @@ def atualizar_configuracao(mes: int, ano: int, valor: float, db: Session = Depen
     db.commit()
     db.refresh(config)
     return config
+
+@app.get("/configuracoes", response_model=List[models.ConfiguracaoMesResponse])
+def listar_configuracoes(db: Session = Depends(get_db)):
+    configs = db.query(models.ConfiguracaoMes).order_by(
+        models.ConfiguracaoMes.ano.desc(),
+        models.ConfiguracaoMes.mes.desc()
+    ).all()
+    return configs
+
+@app.delete("/configuracoes/{config_id}")
+def deletar_configuracao(config_id: int, db: Session = Depends(get_db)):
+    config = db.query(models.ConfiguracaoMes).filter(models.ConfiguracaoMes.id == config_id).first()
+    if not config:
+        raise HTTPException(status_code=404, detail="Configuração não encontrada")
+    db.delete(config)
+    db.commit()
+    return {"message": "Configuração deletada com sucesso"}
 
 # PRESENÇAS
 @app.get("/presencas/{data_str}", response_model=List[models.PresencaDiaResponse])
@@ -193,6 +220,18 @@ def resumo_pessoas(mes: int, ano: int, db: Session = Depends(get_db)):
         }
         for r in result
     ]
+
+@app.get("/dias-com-presenca/{mes}/{ano}")
+def dias_com_presenca(mes: int, ano: int, db: Session = Depends(get_db)):
+    dias = db.query(
+        func.distinct(extract('day', models.Presenca.data)).label('dia')
+    ).filter(
+        extract('month', models.Presenca.data) == mes,
+        extract('year', models.Presenca.data) == ano,
+        models.Presenca.almocou == True
+    ).all()
+    
+    return [int(d.dia) for d in dias]
 
 @app.get("/")
 def root():

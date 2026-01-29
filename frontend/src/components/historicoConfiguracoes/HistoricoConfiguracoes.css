@@ -1,0 +1,119 @@
+.modal-content-historico {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.lista-configuracoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.config-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.config-item:hover {
+  background: #f0f0f0;
+}
+
+.config-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.config-mes {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+  min-width: 180px;
+}
+
+.config-valor {
+  font-size: 1rem;
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.config-acoes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.config-acoes button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.btn-editar {
+  background: #3498db;
+  color: white;
+}
+
+.btn-editar:hover {
+  background: #2980b9;
+}
+
+.btn-deletar {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-deletar:hover {
+  background: #c0392b;
+}
+
+.btn-salvar {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background: #229954;
+}
+
+.btn-cancelar {
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background: #7f8c8d;
+}
+
+.input-editar-valor {
+  padding: 0.5rem;
+  border: 2px solid #3498db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  width: 120px;
+}
+
+.sem-dados {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  font-size: 0.95rem;
+}

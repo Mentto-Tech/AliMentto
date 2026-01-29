@@ -60,3 +60,32 @@
 .div2, .div3 {
   flex: 1;
 }
+
+.botoes-gerenciamento {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-gerenciar {
+  width: 70%;
+  padding: 0.75rem;
+  background: #ff9b7a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.2s;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.btn-gerenciar:hover {
+  background: #ff8861;
+}
