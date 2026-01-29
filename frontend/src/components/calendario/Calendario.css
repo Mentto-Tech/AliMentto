@@ -1,0 +1,88 @@
+.calendario {
+  place-content: center;
+  width: 100%;
+  padding: 8px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendario-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  margin-top: 2px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.calendario-header svg { color: #ff6b35; width: 18px; height: 18px; }
+
+.calendario-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.calendario-month { color: #666; font-size: 0.85rem; }
+
+.calendario-nav-button {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 3px;
+}
+
+.calendario-nav-button:hover { color: #666; }
+
+.calendario-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.calendario-weekday {
+  text-align: center;
+  font-size: 0.65rem;
+  color: #999;
+  padding: 4px 0;
+}
+
+.calendario-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calendario-day:hover { background: #f5f5f5; }
+.calendario-day.other-month { color: #ccc; }
+.calendario-day.selected { background: #ff6b35; color: #fff; }
+
+.calendario-selected-info {
+  background: #fff5f2;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.calendario-selected-label {
+  font-size: 0.75rem;
+  color: #999;
+  margin-bottom: 3px;
+}
+
+.calendario-selected-date {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #ff6b35;
+}

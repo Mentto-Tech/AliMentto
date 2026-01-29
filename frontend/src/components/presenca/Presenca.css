@@ -1,0 +1,174 @@
+.main {
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.presenca-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.iconePresenca {
+  color: #ff6b35;
+}
+
+.listaPessoas { 
+  margin-top: 1rem;
+  max-height: 366.5px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.listaPessoas::-webkit-scrollbar {
+  width: 8px;
+}
+
+.listaPessoas::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.listaPessoas::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.listaPessoas::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.itemPessoa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  margin: 8px 0;
+  background: #efefee;
+  border-radius: 10px;
+}
+
+.fotoPessoa {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nomePessoa {
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.labelPresenca {
+  font-size: 0.7rem;
+  color: #666;
+  margin-left: auto;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #ccc;
+  border-radius: 24px;
+  transition: background 0.3s;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.slider:hover { background: #b3b3b3; }
+input:checked + .slider { background: #4CAF50; }
+input:checked + .slider:hover { background: #45a049; }
+input:checked + .slider:before { transform: translateX(26px); }
+
+.btnExcluir {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  transition: all 0.2s;
+}
+
+.btnExcluir:hover {
+  color: #e74c3c;
+  transform: scale(1.15);
+}
+
+.pesquisa {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.nomePessoa {
+  font-size: 0.8rem;
+  max-width: 100px;
+}
+
+.inputPesquisa {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.inputPesquisa:focus {
+  border-color: #ff9b7a;
+}
+
+.inputPesquisa::placeholder {
+  color: #ccc;
+}
+
+.btnAdicionar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px;
+  background: #ff9b7a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.btnAdicionar:hover {
+  background: #ff8861;
+}

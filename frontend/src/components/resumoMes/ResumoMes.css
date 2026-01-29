@@ -1,0 +1,132 @@
+.resumoMes {
+    margin-left: -1rem;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resumo-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    margin-top: -0.5rem;
+}
+
+.iconeResumo {
+    color: #ff6b35;
+    font-size: 1.2rem;
+}
+
+.resumoMes strong {
+    font-size: 1rem;
+    color: #333;
+}
+
+.dados {
+    display: flex;
+    gap: 10px;
+}
+
+.totalAlmoco, .valorTotal {
+    flex: 1;
+    padding: 20px 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.totalAlmoco {
+    background: #ffe5d9;
+}
+
+.valorTotal {
+    background: #d4edda;
+}
+
+.totalAlmoco p, .valorTotal p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.valor-almoco {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ff6b35;
+}
+
+.valor-total {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #28a745;
+}
+
+.listaPorPessoa {
+    margin-top: 20px;
+}
+
+.tituloPorPessoa {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.scrollContainer {
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.itemPessoaResumo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 10px;
+    margin-bottom: 8px;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.nomePessoaResumo {
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 500;
+    flex: 1;
+}
+
+.almocoPessoa {
+    font-size: 0.85rem;
+    color: #999;
+    margin: 0 15px;
+}
+
+.valorPessoa {
+    font-size: 0.9rem;
+    color: #ff9b7a;
+    font-weight: 600;
+}

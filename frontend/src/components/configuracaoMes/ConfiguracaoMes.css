@@ -1,0 +1,59 @@
+.configuracaoMes {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    place-items: left;
+    padding: 8px;
+    background: #fff;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  font-size: 0.8rem;
+}
+
+.configuracaoMes input {
+  width: 20vw;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.configuracaoMes input:focus {
+  border-color: #ff9b7a;
+  box-shadow: 0 0 0 3px rgba(255, 155, 122, 0.1);
+}
+
+.configuracaoMes input::placeholder {
+  color: #ccc;
+}
+
+.btnSalvar {
+    width: 10vw;
+}
+
+.valorInput {
+    display: flex;
+    gap: 1rem;
+}
+
+.btnSalvar {
+  padding: 0.5rem;
+  background: #ff9b7a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.btnSalvar:hover {
+  background: #ff8861;
+}
