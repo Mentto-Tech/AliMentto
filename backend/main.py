@@ -16,7 +16,7 @@ app = FastAPI(title="AliMentto API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://ali-mentto.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
