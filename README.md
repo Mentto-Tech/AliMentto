@@ -6,7 +6,7 @@ Sistema completo para gerenciar a presença e controle de almoços da equipe.
 
 - **Frontend**: React + Vite
 - **Backend**: FastAPI (Python)
-- **Database**: MySQL 8.0
+- **Database**: PostgreSQL
 - **Deploy**: Docker + Docker Compose
 
 ## 📋 Pré-requisitos
@@ -27,8 +27,8 @@ cp .env.example .env
 ```
 
 **IMPORTANTE**: Edite o arquivo `.env` e altere as senhas padrão:
-- `MYSQL_ROOT_PASSWORD`: Senha do usuário root do MySQL
-- `DATABASE_URL`: Atualizar com a nova senha do MySQL
+- `POSTGRES_PASSWORD`: Senha do usuário Postgres
+- `DATABASE_URL`: Atualizar com a connection string do Postgres
 
 ⚠️ **Nunca commite o arquivo `.env` no git!** Ele contém informações sensíveis.
 
@@ -42,7 +42,7 @@ docker-compose up -d
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:8000
 - **API Docs**: http://localhost:8000/docs
-- **Database**: localhost:3306
+- **Database**: localhost:5432
 
 ## 📁 Estrutura do Projeto
 
@@ -104,7 +104,7 @@ docker-compose up -d --build
 
 ### Acessar o banco de dados
 ```bash
-docker exec -it alimentto-db mysql -u root -psenha123 alimentto
+docker exec -it alimentto-db psql -U postgres -d alimentto
 ```
 
 ### Resetar banco de dados

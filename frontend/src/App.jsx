@@ -7,6 +7,7 @@ import ConfiguracaoMes from './components/configuracaoMes/ConfiguracaoMes'
 import ResumoMes from './components/resumoMes/ResumoMes'
 import GerenciarUsuarios from './components/gerenciarUsuarios/GerenciarUsuarios'
 import HistoricoConfiguracoes from './components/historicoConfiguracoes/HistoricoConfiguracoes'
+import BackupRestore from './components/backup/BackupRestore'
 import { FaUsers, FaHistory } from 'react-icons/fa'
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
         <div className='div1'>            
           <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
           
-          <ConfiguracaoMes selectedDate={selectedDate}/>
+          <ConfiguracaoMes selectedDate={selectedDate} onUpdate={triggerRefreshResumo} />
         </div>
 
         <div className='div2'>
@@ -44,6 +45,7 @@ function App() {
             <button className='btn-gerenciar' onClick={() => setModalHistorico(true)}>
               <FaHistory /> Histórico de Valores
             </button>
+            <BackupRestore />
           </div>
         </div>
 

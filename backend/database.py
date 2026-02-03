@@ -5,9 +5,10 @@ import os
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "mysql+pymysql://root:senha123@db:3306/alimentto"
+    "postgresql+psycopg2://postgres:senha123@db:5432/alimentto"
 )
 
+# Use a small connection pool and enable future/compat behavior via URL when needed
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

@@ -1,0 +1,6 @@
+.backup-restore{border:1px dashed #ccc;padding:12px;border-radius:8px;margin-top:10px}
+.backup-restore h3{margin:0 0 8px 0}
+.br-actions{display:flex;gap:8px;align-items:center}
+.import-form{display:flex;gap:8px;align-items:center}
+.btn-export,.btn-import{background:#2d8cf0;border:none;color:white;padding:6px 10px;border-radius:4px;cursor:pointer}
+.br-message{margin-top:8px;color:#333;grid-column:1 / -1;text-align:center}

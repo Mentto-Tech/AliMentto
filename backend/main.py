@@ -1,9 +1,12 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import func, case, extract
 from datetime import date
 from typing import List
+import json
+from sqlalchemy import text
+from datetime import datetime
 import models
 from database import engine, get_db
 
@@ -236,3 +239,75 @@ def dias_com_presenca(mes: int, ano: int, db: Session = Depends(get_db)):
 @app.get("/")
 def root():
     return {"message": "AliMentto API"}
+
+
+# Export entire database as JSON
+@app.get("/export")
+def export_db(db: Session = Depends(get_db)):
+    pessoas = db.query(models.Pessoa).order_by(models.Pessoa.id).all()
+    configuracoes = db.query(models.ConfiguracaoMes).order_by(models.ConfiguracaoMes.id).all()
+    presencas = db.query(models.Presenca).order_by(models.Presenca.id).all()
+
+    def pessoa_to_dict(p):
+        return {"id": p.id, "nome": p.nome, "ativo": p.ativo, "criado_em": p.criado_em.isoformat() if p.criado_em else None}
+
+    def config_to_dict(c):
+        return {"id": c.id, "mes": c.mes, "ano": c.ano, "valor_almoco": float(c.valor_almoco)}
+
+    def presenca_to_dict(pr):
+        return {"id": pr.id, "pessoa_id": pr.pessoa_id, "data": pr.data.isoformat(), "almocou": pr.almocou, "criado_em": pr.criado_em.isoformat() if pr.criado_em else None}
+
+    payload = {
+        "pessoas": [pessoa_to_dict(p) for p in pessoas],
+        "configuracoes_mes": [config_to_dict(c) for c in configuracoes],
+        "presencas": [presenca_to_dict(pr) for pr in presencas]
+    }
+
+    return payload
+
+
+# Import entire DB from JSON file (multipart form upload)
+@app.post("/import")
+def import_db(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    content = file.file.read()
+    try:
+        data = json.loads(content)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid JSON: {e}")
+
+    try:
+        # Truncate and reset identities
+        db.execute(text("TRUNCATE TABLE presencas, pessoas, configuracoes_mes RESTART IDENTITY CASCADE;"))
+
+        # Insert pessoas (preserve ids)
+        for p in data.get("pessoas", []):
+            pessoa = models.Pessoa(id=p.get("id"), nome=p.get("nome"), ativo=p.get("ativo", True))
+            db.add(pessoa)
+
+        # Insert configuracoes
+        for c in data.get("configuracoes_mes", []):
+            cfg = models.ConfiguracaoMes(id=c.get("id"), mes=c.get("mes"), ano=c.get("ano"), valor_almoco=c.get("valor_almoco", 0.0))
+            db.add(cfg)
+
+        db.commit()
+
+        # Insert presencas (dates)
+        for pr in data.get("presencas", []):
+            data_str = pr.get("data")
+            dt = datetime.fromisoformat(data_str).date() if data_str else None
+            pres = models.Presenca(id=pr.get("id"), pessoa_id=pr.get("pessoa_id"), data=dt, almocou=pr.get("almocou", False))
+            db.add(pres)
+
+        db.commit()
+
+        # Ensure sequences are set to max(id)
+        db.execute(text("SELECT setval(pg_get_serial_sequence('pessoas','id'), COALESCE((SELECT MAX(id) FROM pessoas), 1), true);"))
+        db.execute(text("SELECT setval(pg_get_serial_sequence('configuracoes_mes','id'), COALESCE((SELECT MAX(id) FROM configuracoes_mes), 1), true);"))
+        db.execute(text("SELECT setval(pg_get_serial_sequence('presencas','id'), COALESCE((SELECT MAX(id) FROM presencas), 1), true);"))
+        db.commit()
+
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Import failed: {e}")
+
+    return {"message": "Import successful"}

@@ -10,10 +10,5 @@ services:
       - key: DATABASE_URL
         value: "REPLACE_WITH_DATABASE_URL"
 
-databases:
-  - name: alimentto-db
-    engine: mysql
-    version: "8"
-    plan: starter
-    numInstances: 1
-    region: oregon
+# No automatic managed database configured here. Create a Postgres managed DB in Render
+# and set the `DATABASE_URL` env var for the service.

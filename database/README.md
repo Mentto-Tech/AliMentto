@@ -29,12 +29,13 @@ Sistema de controle de presenças para almoços da equipe.
 
 ### 1. Criar o banco de dados e tabelas
 ```bash
-mysql -u root -p < create.sql
+# Usando o container Postgres (local via docker-compose):
+docker exec -it alimentto-db psql -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-alimentto} -f /docker-entrypoint-initdb.d/1-create.sql
 ```
 
 ### 2. Popular com dados iniciais
 ```bash
-mysql -u root -p < seeds.sql
+docker exec -it alimentto-db psql -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-alimentto} -f /docker-entrypoint-initdb.d/2-seeds.sql
 ```
 
 ## Queries úteis

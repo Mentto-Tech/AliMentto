@@ -1,11 +1,8 @@
-USE alimentto;
+-- Seeds for PostgreSQL
+-- This script runs against the database defined by POSTGRES_DB in docker-compose / container env.
 
--- Limpar dados existentes
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE presencas;
-TRUNCATE TABLE pessoas;
-TRUNCATE TABLE configuracoes_mes;
-SET FOREIGN_KEY_CHECKS = 1;
+-- Limpar dados existentes e reiniciar identities
+TRUNCATE TABLE presencas, pessoas, configuracoes_mes RESTART IDENTITY CASCADE;
 
 -- Inserir pessoas
 INSERT INTO pessoas (nome, ativo) VALUES
@@ -22,4 +19,4 @@ INSERT INTO pessoas (nome, ativo) VALUES
 
 -- Configuração de valores mensais (Janeiro 2026)
 INSERT INTO configuracoes_mes (mes, ano, valor_almoco) VALUES
-(1, 2026, 13.60),
+(1, 2026, 13.60);
