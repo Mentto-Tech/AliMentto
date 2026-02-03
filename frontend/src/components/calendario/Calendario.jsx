@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaCalendarAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import './Calendario.css';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
@@ -15,7 +16,7 @@ function Calendario({ selectedDate, setSelectedDate }) {
       const mes = currentDate.getMonth() + 1;
       
       try {
-        const response = await fetch(`http://localhost:8000/dias-com-presenca/${mes}/${ano}`);
+        const response = await fetch(`${API}/dias-com-presenca/${mes}/${ano}`);
         if (response.ok) {
           const dias = await response.json();
           setDiasComPresenca(dias);

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaTimes, FaUserPlus, FaTrash, FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 import './GerenciarUsuarios.css';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
   const [pessoas, setPessoas] = useState([]);
@@ -9,7 +10,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
   const [nomeEditando, setNomeEditando] = useState('');
 
   const carregarPessoas = () => {
-    fetch('http://localhost:8000/pessoas')
+    fetch(`${API}/pessoas`)
       .then(response => response.json())
       .then(data => setPessoas(data))
       .catch(error => console.error('Erro ao buscar pessoas:', error));
@@ -25,7 +26,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
     e.preventDefault();
     if (!nome.trim()) return;
 
-    await fetch('http://localhost:8000/pessoas', {
+    await fetch(`${API}/pessoas`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nome: nome.trim(), ativo: true })
@@ -37,7 +38,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
   };
 
   const toggleAtivo = async (id, ativoAtual) => {
-    await fetch(`http://localhost:8000/pessoas/${id}?ativo=${!ativoAtual}`, {
+    await fetch(`${API}/pessoas/${id}?ativo=${!ativoAtual}`, {
       method: 'PUT'
     });
     carregarPessoas();
@@ -52,7 +53,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
   const salvarEdicao = async (id) => {
     if (!nomeEditando.trim()) return;
 
-    await fetch(`http://localhost:8000/pessoas/${id}/nome?nome=${encodeURIComponent(nomeEditando.trim())}`, {
+    await fetch(`${API}/pessoas/${id}/nome?nome=${encodeURIComponent(nomeEditando.trim())}`, {
       method: 'PATCH'
     });
 
@@ -73,7 +74,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
     }
 
     try {
-      await fetch(`http://localhost:8000/pessoas/${id}`, {
+      await fetch(`${API}/pessoas/${id}`, {
         method: 'DELETE'
       });
       carregarPessoas();

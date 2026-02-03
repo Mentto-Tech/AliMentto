@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaTimes, FaPlus, FaEdit, FaTrash, FaCheck } from 'react-icons/fa';
 import './HistoricoConfiguracoes.css';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
@@ -11,7 +12,7 @@ function HistoricoConfiguracoes({ isOpen, onClose, onUpdate }) {
 
   const carregarConfiguracoes = async () => {
     try {
-      const response = await fetch('http://localhost:8000/configuracoes');
+      const response = await fetch(`${API}/configuracoes`);
       const data = await response.json();
       setConfiguracoes(data);
     } catch (error) {
@@ -33,7 +34,7 @@ function HistoricoConfiguracoes({ isOpen, onClose, onUpdate }) {
   const salvarEdicao = async (mes, ano) => {
     if (!valorEditando || parseFloat(valorEditando) <= 0) return;
 
-    await fetch(`http://localhost:8000/configuracoes/${mes}/${ano}?valor=${valorEditando}`, {
+    await fetch(`${API}/configuracoes/${mes}/${ano}?valor=${valorEditando}`, {
       method: 'PUT'
     });
 
@@ -51,7 +52,7 @@ function HistoricoConfiguracoes({ isOpen, onClose, onUpdate }) {
   const deletarConfiguracao = async (id) => {
     if (!window.confirm('Tem certeza que deseja deletar esta configuração?')) return;
 
-    await fetch(`http://localhost:8000/configuracoes/${id}`, {
+    await fetch(`${API}/configuracoes/${id}`, {
       method: 'DELETE'
     });
 

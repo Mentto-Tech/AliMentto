@@ -3,6 +3,8 @@ import { FaUserPlus, FaTrash, FaUsers } from 'react-icons/fa';
 import pessoaIcone from '../../assets/pessoaIcone.png';
 import './Presenca.css';
 
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 function Presenca ({ selectedDate, onPresencaUpdate }) {
 
     const [presencas, setPresencas] = useState([]);
@@ -10,7 +12,7 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
 
     const carregarPresencas = () => {
         const dateStr = formatDateISO(selectedDate);
-        fetch(`http://localhost:8000/presencas/${dateStr}`)
+        fetch(`${API}/presencas/${dateStr}`)
             .then(response => response.json())
             .then(data => setPresencas(data))
             .catch(error => console.error('Erro ao buscar presenças:', error));
@@ -32,7 +34,7 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
 
     useEffect(() => {
         const dateStr = formatDateISO(selectedDate);
-        fetch(`http://localhost:8000/presencas/${dateStr}`)
+        fetch(`${API}/presencas/${dateStr}`)
             .then(response => response.json())
             .then(data => setPresencas(data))
             .catch(error => console.error('Erro ao buscar presenças:', error));
@@ -41,7 +43,7 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
     async function adicionarPessoa(e) {
       e.preventDefault();
 
-      await fetch('http://localhost:8000/pessoas', {
+      await fetch(`${API}/pessoas`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"
@@ -61,7 +63,7 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
 
       if (!confirm) return;
 
-      await fetch(`http://localhost:8000/pessoas/${id}?ativo=false`, {
+        await fetch(`${API}/pessoas/${id}?ativo=false`, {
           method: 'PUT'
       });
       
@@ -71,7 +73,7 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
     async function togglePresenca(pessoaId, almocou) {
         const dateStr = formatDateISO(selectedDate);
         
-        await fetch('http://localhost:8000/presencas', {
+        await fetch(`${API}/presencas`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
