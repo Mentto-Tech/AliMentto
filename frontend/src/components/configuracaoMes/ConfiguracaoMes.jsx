@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useApi } from '../../context/ApiContext'
 import './ConfiguracaoMes.css';
 
 const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
@@ -10,11 +11,10 @@ function ConfiguracaoMes({ selectedDate, onUpdate }) {
   const mesNome = monthNames[selectedDate.getMonth()];
   
   const [valor, setValor] = useState('');
-
-  const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+  const { request } = useApi()
 
   const carregarConfiguracao = () => {
-    fetch(`${API}/configuracoes/${mes}/${ano}`)
+    request(`/configuracoes/${mes}/${ano}`)
       .then(response => response.json())
       .then(data => setValor(data.valor_almoco))
       .catch(error => console.error('Erro ao buscar configuração:', error));
@@ -27,7 +27,7 @@ function ConfiguracaoMes({ selectedDate, onUpdate }) {
   async function salvarConfiguracao(e) {
     e.preventDefault();
 
-    const res = await fetch(`${API}/configuracoes/${mes}/${ano}?valor=${valor}`, {
+    const res = await request(`/configuracoes/${mes}/${ano}?valor=${valor}`, {
       method: 'PUT'
     });
 

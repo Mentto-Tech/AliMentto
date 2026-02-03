@@ -9,6 +9,9 @@ import GerenciarUsuarios from './components/gerenciarUsuarios/GerenciarUsuarios'
 import HistoricoConfiguracoes from './components/historicoConfiguracoes/HistoricoConfiguracoes'
 import BackupRestore from './components/backup/BackupRestore'
 import { FaUsers, FaHistory } from 'react-icons/fa'
+import { useContext } from 'react'
+import { useApi } from './context/ApiContext'
+import './globalLoader.css'
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -20,6 +23,8 @@ function App() {
 
   return (
     <>
+      {/** Fullscreen loader when API provider indicates loading */}
+      <FullScreenLoader />
       <header className='header'>
         <img className='logo' src={logo} alt="AliMentto logo"/>
         <div className='textosHeader'>
@@ -70,3 +75,13 @@ function App() {
 }
 
 export default App
+
+function FullScreenLoader(){
+  const { loading } = useApi() || { loading: false }
+  if(!loading) return null
+  return (
+    <div className="full-screen-loader">
+      <div className="loader-box">Carregando dados...</div>
+    </div>
+  )
+}

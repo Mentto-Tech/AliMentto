@@ -1,27 +1,27 @@
 import { FaChartLine } from 'react-icons/fa';
 import './ResumoMes.css';
 import { useState, useEffect } from 'react';
-
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+import { useApi } from '../../context/ApiContext'
 
 function ResumoMes({ selectedDate, refreshTrigger }) {
     
     const [resumo, setResumo] = useState({ total_almocos: 0, valor_total: 0 });
     const [pessoas, setPessoas] = useState([]);
+    const { request } = useApi()
 
     useEffect(() => {
         const mes = selectedDate.getMonth() + 1;
         const ano = selectedDate.getFullYear();
 
         // Buscar resumo total
-        fetch(`${API}/resumo/${mes}/${ano}`)
-            .then(response => response.json())
+        request(`/resumo/${mes}/${ano}`)
+            .then(r => r.json())
             .then(data => setResumo(data))
             .catch(error => console.error('Erro ao buscar resumo:', error));
 
         // Buscar resumo por pessoa
-        fetch(`${API}/resumo-pessoas/${mes}/${ano}`)
-            .then(response => response.json())
+        request(`/resumo-pessoas/${mes}/${ano}`)
+            .then(r => r.json())
             .then(data => setPessoas(data))
             .catch(error => console.error('Erro ao buscar resumo por pessoa:', error));
     }, [selectedDate, refreshTrigger]);

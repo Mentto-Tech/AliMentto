@@ -1,20 +1,20 @@
 import React, { useState, useRef } from 'react'
 import { FaDownload, FaUpload } from 'react-icons/fa'
 import './BackupRestore.css'
-
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+import { useApi } from '../../context/ApiContext'
 
 export default function BackupRestore(){
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const fileRef = useRef(null)
+  const { request } = useApi()
 
   const exportData = async () =>{
     setLoading(true)
     setMessage('')
     try{
-      const res = await fetch(`${API}/export`)
-      if(!res.ok) throw new Error('Export failed')
+      const res = await request('/export')
+      if (!res.ok) throw new Error('Export failed')
       const data = await res.json()
       const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'})
       const url = URL.createObjectURL(blob)
@@ -40,9 +40,9 @@ export default function BackupRestore(){
     const form = new FormData()
     form.append('file', file)
     try{
-      const res = await fetch(`${API}/import`, { method: 'POST', body: form })
+      const res = await request('/import', { method: 'POST', body: form })
       const body = await res.json()
-      if(!res.ok) throw new Error(body.detail || JSON.stringify(body))
+      if (!res.ok) throw new Error(body.detail || JSON.stringify(body))
       setMessage('Importado com sucesso')
       fileRef.current.value = ''
     }catch(err){

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaTimes, FaUserPlus, FaTrash, FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 import './GerenciarUsuarios.css';
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+import { useApi } from '../../context/ApiContext'
 
 function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
   const [pessoas, setPessoas] = useState([]);
@@ -9,8 +9,9 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
   const [editandoId, setEditandoId] = useState(null);
   const [nomeEditando, setNomeEditando] = useState('');
 
+  const { request } = useApi()
   const carregarPessoas = () => {
-    fetch(`${API}/pessoas`)
+    request('/pessoas')
       .then(response => response.json())
       .then(data => setPessoas(data))
       .catch(error => console.error('Erro ao buscar pessoas:', error));
@@ -26,7 +27,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
     e.preventDefault();
     if (!nome.trim()) return;
 
-    await fetch(`${API}/pessoas`, {
+    await request('/pessoas', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nome: nome.trim(), ativo: true })
@@ -38,7 +39,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
   };
 
   const toggleAtivo = async (id, ativoAtual) => {
-    await fetch(`${API}/pessoas/${id}?ativo=${!ativoAtual}`, {
+    await request(`/pessoas/${id}?ativo=${!ativoAtual}`, {
       method: 'PUT'
     });
     carregarPessoas();
@@ -53,7 +54,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
   const salvarEdicao = async (id) => {
     if (!nomeEditando.trim()) return;
 
-    await fetch(`${API}/pessoas/${id}/nome?nome=${encodeURIComponent(nomeEditando.trim())}`, {
+    await request(`/pessoas/${id}/nome?nome=${encodeURIComponent(nomeEditando.trim())}`, {
       method: 'PATCH'
     });
 
@@ -74,7 +75,7 @@ function GerenciarUsuarios({ isOpen, onClose, onUpdate }) {
     }
 
     try {
-      await fetch(`${API}/pessoas/${id}`, {
+      await request(`/pessoas/${id}`, {
         method: 'DELETE'
       });
       carregarPessoas();

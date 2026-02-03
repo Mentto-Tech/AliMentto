@@ -2,20 +2,21 @@ import { useEffect, useState } from 'react';
 import { FaUserPlus, FaTrash, FaUsers } from 'react-icons/fa';
 import pessoaIcone from '../../assets/pessoaIcone.png';
 import './Presenca.css';
-
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+import { useApi } from '../../context/ApiContext'
 
 function Presenca ({ selectedDate, onPresencaUpdate }) {
 
     const [presencas, setPresencas] = useState([]);
     const [nome, setNome] = useState('');
+  const { request } = useApi()
 
     const carregarPresencas = () => {
         const dateStr = formatDateISO(selectedDate);
-        fetch(`${API}/presencas/${dateStr}`)
-            .then(response => response.json())
-            .then(data => setPresencas(data))
-            .catch(error => console.error('Erro ao buscar presenças:', error));
+        const { request } = useApi()
+        request(`/presencas/${dateStr}`)
+          .then(res => res.json())
+          .then(data => setPresencas(data))
+          .catch(error => console.error('Erro ao buscar presenças:', error));
     };
 
     const formatDate = (date) => {
@@ -33,25 +34,20 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
     };
 
     useEffect(() => {
-        const dateStr = formatDateISO(selectedDate);
-        fetch(`${API}/presencas/${dateStr}`)
-            .then(response => response.json())
-            .then(data => setPresencas(data))
-            .catch(error => console.error('Erro ao buscar presenças:', error));
+      const dateStr = formatDateISO(selectedDate);
+      request(`/presencas/${dateStr}`)
+        .then(response => response.json())
+        .then(data => setPresencas(data))
+        .catch(error => console.error('Erro ao buscar presenças:', error));
     }, [selectedDate]);
 
     async function adicionarPessoa(e) {
       e.preventDefault();
 
-      await fetch(`${API}/pessoas`, {
+      await request('/pessoas', {
           method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ 
-            nome,
-            ativo: true 
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, ativo: true })
       });
 
       setNome('');
@@ -63,9 +59,7 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
 
       if (!confirm) return;
 
-        await fetch(`${API}/pessoas/${id}?ativo=false`, {
-          method: 'PUT'
-      });
+        await request(`/pessoas/${id}?ativo=false`, { method: 'PUT' })
       
       carregarPresencas();
     }
@@ -73,17 +67,12 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
     async function togglePresenca(pessoaId, almocou) {
         const dateStr = formatDateISO(selectedDate);
         
-        await fetch(`${API}/presencas`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                pessoa_id: pessoaId,
-                data: dateStr,
-                almocou: !almocou
-            })
-        });
+        const { request } = useApi()
+        await request('/presencas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pessoa_id: pessoaId, data: dateStr, almocou: !almocou })
+        })
         
         carregarPresencas();
         if (onPresencaUpdate) {
