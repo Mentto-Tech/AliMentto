@@ -12,7 +12,6 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
 
     const carregarPresencas = () => {
         const dateStr = formatDateISO(selectedDate);
-        const { request } = useApi()
         request(`/presencas/${dateStr}`)
           .then(res => res.json())
           .then(data => setPresencas(data))
@@ -66,8 +65,6 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
 
     async function togglePresenca(pessoaId, almocou) {
         const dateStr = formatDateISO(selectedDate);
-        
-        const { request } = useApi()
         await request('/presencas', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
