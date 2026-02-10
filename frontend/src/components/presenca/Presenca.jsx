@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaUserPlus, FaTrash, FaUsers } from 'react-icons/fa';
+import { FaUserPlus, FaTrash, FaUsers, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 import pessoaIcone from '../../assets/pessoaIcone.png';
 import './Presenca.css';
 import { useApi } from '../../context/ApiContext'
@@ -8,7 +8,9 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
 
     const [presencas, setPresencas] = useState([]);
     const [nome, setNome] = useState('');
-  const { request } = useApi()
+    const [sortOrder, setSortOrder] = useState(null); // null = sem ordenação, 'desc' = mais para menos, 'asc' = menos para mais
+    const [resumoMensal, setResumoMensal] = useState([]);
+    const { request } = useApi()
 
     const carregarPresencas = () => {
         const dateStr = formatDateISO(selectedDate);
@@ -32,13 +34,51 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
         return `${year}-${month}-${day}`;
     };
 
+    const carregarResumoMensal = () => {
+        const mes = selectedDate.getMonth() + 1;
+        const ano = selectedDate.getFullYear();
+        request(`/resumo-pessoas/${mes}/${ano}`)
+          .then(res => res.json())
+          .then(data => setResumoMensal(data))
+          .catch(error => console.error('Erro ao buscar resumo mensal:', error));
+    };
+
     useEffect(() => {
       const dateStr = formatDateISO(selectedDate);
       request(`/presencas/${dateStr}`)
         .then(response => response.json())
         .then(data => setPresencas(data))
         .catch(error => console.error('Erro ao buscar presenças:', error));
+      
+      carregarResumoMensal();
     }, [selectedDate]);
+
+    const toggleSort = () => {
+        if (sortOrder === null) {
+            setSortOrder('desc');
+        } else if (sortOrder === 'desc') {
+            setSortOrder('asc');
+        } else {
+            setSortOrder(null);
+        }
+    };
+
+    const getPresencasOrdenadas = () => {
+        if (sortOrder === null) {
+            return presencas;
+        }
+
+        const resumoMap = {};
+        resumoMensal.forEach(r => {
+            resumoMap[r.nome] = r.total_almocos;
+        });
+
+        return [...presencas].sort((a, b) => {
+            const totalA = resumoMap[a.nome] || 0;
+            const totalB = resumoMap[b.nome] || 0;
+            return sortOrder === 'desc' ? totalB - totalA : totalA - totalB;
+        });
+    };
 
     async function adicionarPessoa(e) {
       e.preventDefault();
@@ -77,11 +117,25 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
         }
     }
 
+    const presencasOrdenadas = getPresencasOrdenadas();
+    const resumoMap = {};
+    resumoMensal.forEach(r => {
+        resumoMap[r.nome] = r.total_almocos;
+    });
+
     return (
         <div className='main'>
           <div className='presenca-header'>
             <FaUsers className='iconePresenca' size={20}/>
             <strong>Presença - {formatDate(selectedDate)}</strong>
+            <button 
+              className={`btnSort ${sortOrder ? 'active' : ''}`} 
+              onClick={toggleSort}
+              title={sortOrder === 'desc' ? 'Ordenar: menos para mais' : sortOrder === 'asc' ? 'Remover ordenação' : 'Ordenar: mais para menos'}
+            >
+              {sortOrder === 'asc' ? <FaSortAmountUp size={16} /> : <FaSortAmountDown size={16} />}
+              {sortOrder && <span className='sortLabel'>{sortOrder === 'desc' ? 'Mais' : 'Menos'}</span>}
+            </button>
           </div>
 
           <div className='adicionarUsuario'>
@@ -101,10 +155,11 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
           </div>
 
           <div className='listaPessoas'>
-            {presencas.map(pessoa => (
+            {presencasOrdenadas.map(pessoa => (
                 <div key={pessoa.id} className='itemPessoa'>
                     <img src={pessoaIcone} alt={pessoa.nome} className='fotoPessoa'/>
                     <span className='nomePessoa'>{pessoa.nome}</span>
+                    {sortOrder && <span className='badgeMensal' title='Almoços no mês'>{resumoMap[pessoa.nome] || 0}x</span>}
                     <span className='labelPresenca'>{pessoa.almocou ? 'Almoçou' : 'Não almoçou'}</span>
                     
                     <label className='toggle-switch'>
