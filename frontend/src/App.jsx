@@ -39,7 +39,12 @@ function Dashboard() {
     <>
       <FullScreenLoader />
       <header className='header'>
-        <div style={{ display: 'flex', gap: '10px', marginRight: 'auto' }}>
+        <img className='logo' src={logo} alt="AliMentto logo"/>
+        <div className='textosHeader'>
+          <strong>AliMentto</strong>
+          <p>Controle de Almoços</p>
+        </div>
+        <div style={{ display: 'flex', gap: '10px', marginLeft: 'auto' }}>
           <button 
             className='btn-logout' 
             onClick={() => navigate('/alterar-senha')} 
@@ -50,11 +55,6 @@ function Dashboard() {
           <button className='btn-logout' onClick={handleLogout} title="Sair">
             <FiLogOut /> Sair
           </button>
-        </div>
-        <img className='logo' src={logo} alt="AliMentto logo"/>
-        <div className='textosHeader'>
-          <strong>AliMentto</strong>
-          <p>Controle de Almoços</p>
         </div>
       </header>
 
