@@ -39,23 +39,22 @@ function Dashboard() {
     <>
       <FullScreenLoader />
       <header className='header'>
-        <img className='logo' src={logo} alt="AliMentto logo"/>
-        <div className='textosHeader'>
-          <strong>AliMentto</strong>
-          <p>Controle de Almoços</p>
-        </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '10px', marginRight: 'auto' }}>
           <button 
             className='btn-logout' 
             onClick={() => navigate('/alterar-senha')} 
             title="Configurações"
-            style={{ background: '#2196F3' }}
           >
-            ⚙️ Senha
+            Senha
           </button>
           <button className='btn-logout' onClick={handleLogout} title="Sair">
             <FiLogOut /> Sair
           </button>
+        </div>
+        <img className='logo' src={logo} alt="AliMentto logo"/>
+        <div className='textosHeader'>
+          <strong>AliMentto</strong>
+          <p>Controle de Almoços</p>
         </div>
       </header>
 
