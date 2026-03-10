@@ -44,7 +44,7 @@ function Dashboard() {
           <strong>AliMentto</strong>
           <p>Controle de Almoços</p>
         </div>
-        <div style={{ display: 'flex', gap: '10px', marginLeft: 'auto' }}>
+        <div style={{ display: 'flex', gap: '10px', marginLeft: 'auto', marginRight: '30px'}}>
           <button 
             className='btn-logout' 
             onClick={() => navigate('/alterar-senha')} 
