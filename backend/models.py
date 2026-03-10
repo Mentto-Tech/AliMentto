@@ -97,3 +97,37 @@ class ResumoPessoaResponse(BaseModel):
     nome: str
     total_almocos: int
     valor_total: float
+
+
+# ── Auth ──────────────────────────────────────────────────
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String(50), unique=True, nullable=False, index=True)
+    senha_hash = Column(String(255), nullable=False)
+    criado_em = Column(TIMESTAMP, server_default=func.now())
+
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class UsuarioInfo(BaseModel):
+    id: int
+    username: str
+
+    class Config:
+        from_attributes = True
+
+
+class AlterarSenhaRequest(BaseModel):
+    senha_atual: str
+    senha_nova: str

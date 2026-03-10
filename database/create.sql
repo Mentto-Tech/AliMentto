@@ -30,3 +30,12 @@ CREATE TABLE IF NOT EXISTS presencas (
 CREATE INDEX IF NOT EXISTS idx_presencas_data ON presencas(data);
 CREATE INDEX IF NOT EXISTS idx_presencas_pessoa ON presencas(pessoa_id);
 CREATE INDEX IF NOT EXISTS idx_config_mes_ano ON configuracoes_mes(mes, ano);
+
+CREATE TABLE IF NOT EXISTS usuarios (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  senha_hash VARCHAR(255) NOT NULL,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_usuarios_username ON usuarios(username);

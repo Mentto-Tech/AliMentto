@@ -9,6 +9,8 @@ services:
     envVars:
       - key: DATABASE_URL
         value: "REPLACE_WITH_DATABASE_URL"
+      - key: SECRET_KEY
+        generateValue: true
 
 # No automatic managed database configured here. Create a Postgres managed DB in Render
 # and set the `DATABASE_URL` env var for the service.

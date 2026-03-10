@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import './App.css'
 import logo from './assets/logo.png'
 import Calendario from './components/calendario/Calendario'
@@ -8,22 +9,33 @@ import ResumoMes from './components/resumoMes/ResumoMes'
 import GerenciarUsuarios from './components/gerenciarUsuarios/GerenciarUsuarios'
 import HistoricoConfiguracoes from './components/historicoConfiguracoes/HistoricoConfiguracoes'
 import BackupRestore from './components/backup/BackupRestore'
+import Login from './components/login/Login'
 import { FaUsers, FaHistory } from 'react-icons/fa'
-import { useContext } from 'react'
+import { FiLogOut } from 'react-icons/fi'
 import { useApi } from './context/ApiContext'
 import './globalLoader.css'
 
-function App() {
+function PrivateRoute({ children }) {
+  const token = localStorage.getItem('auth_token')
+  return token ? children : <Navigate to="/login" replace />
+}
+
+function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [refreshResumo, setRefreshResumo] = useState(0);
   const [modalUsuarios, setModalUsuarios] = useState(false);
   const [modalHistorico, setModalHistorico] = useState(false);
+  const navigate = useNavigate();
 
   const triggerRefreshResumo = () => setRefreshResumo(prev => prev + 1);
 
+  const handleLogout = () => {
+    localStorage.removeItem('auth_token');
+    navigate('/login', { replace: true });
+  };
+
   return (
     <>
-      {/** Fullscreen loader when API provider indicates loading */}
       <FullScreenLoader />
       <header className='header'>
         <img className='logo' src={logo} alt="AliMentto logo"/>
@@ -31,6 +43,9 @@ function App() {
           <strong>AliMentto</strong>
           <p>Controle de Almoços</p>
         </div>
+        <button className='btn-logout' onClick={handleLogout} title="Sair">
+          <FiLogOut /> Sair
+        </button>
       </header>
 
       <div className="App">
@@ -71,6 +86,20 @@ function App() {
         onUpdate={triggerRefreshResumo}
       />
     </>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={
+        <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+      } />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   )
 }
 

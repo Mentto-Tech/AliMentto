@@ -1,16 +1,61 @@
-from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
+from fastapi import FastAPI, Depends, HTTPException, File, UploadFile, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from sqlalchemy import func, case, extract
-from datetime import date
+from datetime import date, datetime, timedelta
 from typing import List
 import json
+import os
 from sqlalchemy import text
-from datetime import datetime
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+import bcrypt
 import models
 from database import engine, get_db
 
 models.Base.metadata.create_all(bind=engine)
+
+# ── Auth config ────────────────────────────────────────────────────────────────
+
+SECRET_KEY = os.getenv("SECRET_KEY", "CHANGE_THIS_SECRET_KEY_IN_PRODUCTION")
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_HOURS = 8
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+http_bearer = HTTPBearer()
+
+
+def create_access_token(data: dict) -> str:
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(hours=ACCESS_TOKEN_EXPIRE_HOURS)
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+
+async def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(http_bearer),
+    db: Session = Depends(get_db),
+):
+    exc = HTTPException(
+        status_code=401,
+        detail="Token inválido ou expirado",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(credentials.credentials, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise exc
+    except JWTError:
+        raise exc
+    usuario = db.query(models.Usuario).filter(models.Usuario.username == username).first()
+    if usuario is None:
+        raise exc
+    return usuario
+
+
+# ── App ────────────────────────────────────────────────────────────────────────
 
 app = FastAPI(title="AliMentto API")
 
@@ -22,15 +67,106 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+# ── Startup: criar usuário admin se não existir ────────────────────────────────
+
+@app.on_event("startup")
+def create_default_admin():
+    """
+    Cria automaticamente o usuário admin padrão se não existir nenhum usuário no banco.
+    Senha padrão: admin123 (DEVE SER ALTERADA após o primeiro login!)
+    """
+    db = next(get_db())
+    try:
+        # Verifica se já existe algum usuário
+        usuario_count = db.query(models.Usuario).count()
+        
+        if usuario_count == 0:
+            # Credenciais padrão (ALTERE APÓS O PRIMEIRO LOGIN!)
+            default_username = "admin"
+            default_password = "admin123"
+            
+            # Gera hash da senha
+            salt = bcrypt.gensalt()
+            senha_hash = bcrypt.hashpw(default_password.encode('utf-8'), salt).decode('utf-8')
+            
+            # Cria o usuário admin
+            novo_usuario = models.Usuario(
+                username=default_username,
+                senha_hash=senha_hash
+            )
+            db.add(novo_usuario)
+            db.commit()
+            
+            print("=" * 60)
+            print("USUÁRIO ADMIN CRIADO COM SUCESSO!")
+            print(f"Username: {default_username}")
+            print(f"Senha: {default_password}")
+            print("⚠️  IMPORTANTE: Altere esta senha após o primeiro login!")
+            print("=" * 60)
+    except Exception as e:
+        print(f"Erro ao criar usuário admin: {e}")
+        db.rollback()
+    finally:
+        db.close()
+
+
+# ── Public routes ──────────────────────────────────────────────────────────────
+
+@app.get("/")
+def root():
+    return {"message": "AliMentto API"}
+
+
+@app.post("/auth/login", response_model=models.TokenResponse)
+def login(body: models.LoginRequest, db: Session = Depends(get_db)):
+    usuario = db.query(models.Usuario).filter(models.Usuario.username == body.username).first()
+    if not usuario or not pwd_context.verify(body.password, usuario.senha_hash):
+        raise HTTPException(
+            status_code=401,
+            detail="Usuário ou senha inválidos",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    token = create_access_token({"sub": usuario.username})
+    return {"access_token": token, "token_type": "bearer"}
+
+
+# ── Protected routes (require valid JWT) ──────────────────────────────────────
+
+router = APIRouter(dependencies=[Depends(get_current_user)])
+
+# AUTH
+@router.post("/auth/alterar-senha")
+def alterar_senha(
+    body: models.AlterarSenhaRequest,
+    current_user: models.Usuario = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Permite ao usuário logado alterar sua própria senha."""
+    # Verifica se a senha atual está correta
+    if not pwd_context.verify(body.senha_atual, current_user.senha_hash):
+        raise HTTPException(status_code=400, detail="Senha atual incorreta")
+    
+    # Gera hash da nova senha
+    salt = bcrypt.gensalt()
+    nova_senha_hash = bcrypt.hashpw(body.senha_nova.encode('utf-8'), salt).decode('utf-8')
+    
+    # Atualiza a senha
+    current_user.senha_hash = nova_senha_hash
+    db.commit()
+    
+    return {"message": "Senha alterada com sucesso"}
+
+
 # PESSOAS
-@app.get("/pessoas", response_model=List[models.PessoaResponse])
+@router.get("/pessoas", response_model=List[models.PessoaResponse])
 def listar_pessoas(ativo: bool = None, db: Session = Depends(get_db)):
     query = db.query(models.Pessoa)
     if ativo is not None:
         query = query.filter(models.Pessoa.ativo == ativo)
     return query.all()
 
-@app.post("/pessoas", response_model=models.PessoaResponse)
+@router.post("/pessoas", response_model=models.PessoaResponse)
 def criar_pessoa(pessoa: models.PessoaCreate, db: Session = Depends(get_db)):
     db_pessoa = models.Pessoa(**pessoa.dict())
     db.add(db_pessoa)
@@ -38,7 +174,7 @@ def criar_pessoa(pessoa: models.PessoaCreate, db: Session = Depends(get_db)):
     db.refresh(db_pessoa)
     return db_pessoa
 
-@app.put("/pessoas/{pessoa_id}", response_model=models.PessoaResponse)
+@router.put("/pessoas/{pessoa_id}", response_model=models.PessoaResponse)
 def atualizar_pessoa(pessoa_id: int, ativo: bool, db: Session = Depends(get_db)):
     pessoa = db.query(models.Pessoa).filter(models.Pessoa.id == pessoa_id).first()
     if not pessoa:
@@ -48,7 +184,7 @@ def atualizar_pessoa(pessoa_id: int, ativo: bool, db: Session = Depends(get_db))
     db.refresh(pessoa)
     return pessoa
 
-@app.patch("/pessoas/{pessoa_id}/nome", response_model=models.PessoaResponse)
+@router.patch("/pessoas/{pessoa_id}/nome", response_model=models.PessoaResponse)
 def atualizar_nome_pessoa(pessoa_id: int, nome: str, db: Session = Depends(get_db)):
     pessoa = db.query(models.Pessoa).filter(models.Pessoa.id == pessoa_id).first()
     if not pessoa:
@@ -58,7 +194,7 @@ def atualizar_nome_pessoa(pessoa_id: int, nome: str, db: Session = Depends(get_d
     db.refresh(pessoa)
     return pessoa
 
-@app.delete("/pessoas/{pessoa_id}")
+@router.delete("/pessoas/{pessoa_id}")
 def deletar_pessoa(pessoa_id: int, db: Session = Depends(get_db)):
     pessoa = db.query(models.Pessoa).filter(models.Pessoa.id == pessoa_id).first()
     if not pessoa:
@@ -68,7 +204,7 @@ def deletar_pessoa(pessoa_id: int, db: Session = Depends(get_db)):
     return {"message": "Pessoa deletada com sucesso"}
 
 # CONFIGURAÇÕES
-@app.get("/configuracoes/{mes}/{ano}", response_model=models.ConfiguracaoMesResponse)
+@router.get("/configuracoes/{mes}/{ano}", response_model=models.ConfiguracaoMesResponse)
 def obter_configuracao(mes: int, ano: int, db: Session = Depends(get_db)):
     config = db.query(models.ConfiguracaoMes).filter(
         models.ConfiguracaoMes.mes == mes,
@@ -83,7 +219,7 @@ def obter_configuracao(mes: int, ano: int, db: Session = Depends(get_db)):
     
     return config
 
-@app.put("/configuracoes/{mes}/{ano}", response_model=models.ConfiguracaoMesResponse)
+@router.put("/configuracoes/{mes}/{ano}", response_model=models.ConfiguracaoMesResponse)
 def atualizar_configuracao(mes: int, ano: int, valor: float, db: Session = Depends(get_db)):
     config = db.query(models.ConfiguracaoMes).filter(
         models.ConfiguracaoMes.mes == mes,
@@ -100,7 +236,7 @@ def atualizar_configuracao(mes: int, ano: int, valor: float, db: Session = Depen
     db.refresh(config)
     return config
 
-@app.get("/configuracoes", response_model=List[models.ConfiguracaoMesResponse])
+@router.get("/configuracoes", response_model=List[models.ConfiguracaoMesResponse])
 def listar_configuracoes(db: Session = Depends(get_db)):
     configs = db.query(models.ConfiguracaoMes).order_by(
         models.ConfiguracaoMes.ano.desc(),
@@ -108,7 +244,7 @@ def listar_configuracoes(db: Session = Depends(get_db)):
     ).all()
     return configs
 
-@app.delete("/configuracoes/{config_id}")
+@router.delete("/configuracoes/{config_id}")
 def deletar_configuracao(config_id: int, db: Session = Depends(get_db)):
     config = db.query(models.ConfiguracaoMes).filter(models.ConfiguracaoMes.id == config_id).first()
     if not config:
@@ -118,7 +254,7 @@ def deletar_configuracao(config_id: int, db: Session = Depends(get_db)):
     return {"message": "Configuração deletada com sucesso"}
 
 # PRESENÇAS
-@app.get("/presencas/{data_str}", response_model=List[models.PresencaDiaResponse])
+@router.get("/presencas/{data_str}", response_model=List[models.PresencaDiaResponse])
 def listar_presencas_dia(data_str: str, db: Session = Depends(get_db)):
     data_obj = date.fromisoformat(data_str)
     
@@ -135,7 +271,7 @@ def listar_presencas_dia(data_str: str, db: Session = Depends(get_db)):
     
     return [{"id": r.id, "nome": r.nome, "almocou": r.almocou} for r in result]
 
-@app.post("/presencas", response_model=models.PresencaResponse)
+@router.post("/presencas", response_model=models.PresencaResponse)
 def criar_presenca(presenca: models.PresencaCreate, db: Session = Depends(get_db)):
     db_presenca = db.query(models.Presenca).filter(
         models.Presenca.pessoa_id == presenca.pessoa_id,
@@ -152,7 +288,7 @@ def criar_presenca(presenca: models.PresencaCreate, db: Session = Depends(get_db
     db.refresh(db_presenca)
     return db_presenca
 
-@app.put("/presencas/{pessoa_id}/{data_str}", response_model=models.PresencaResponse)
+@router.put("/presencas/{pessoa_id}/{data_str}", response_model=models.PresencaResponse)
 def atualizar_presenca(pessoa_id: int, data_str: str, update: models.PresencaUpdate, db: Session = Depends(get_db)):
     data_obj = date.fromisoformat(data_str)
     
@@ -172,7 +308,7 @@ def atualizar_presenca(pessoa_id: int, data_str: str, update: models.PresencaUpd
     return presenca
 
 # RESUMOS
-@app.get("/resumo/{mes}/{ano}", response_model=models.ResumoMesResponse)
+@router.get("/resumo/{mes}/{ano}", response_model=models.ResumoMesResponse)
 def resumo_mes(mes: int, ano: int, db: Session = Depends(get_db)):
     config = db.query(models.ConfiguracaoMes).filter(
         models.ConfiguracaoMes.mes == mes,
@@ -192,7 +328,7 @@ def resumo_mes(mes: int, ano: int, db: Session = Depends(get_db)):
         "valor_total": total * valor_almoco
     }
 
-@app.get("/resumo-pessoas/{mes}/{ano}", response_model=List[models.ResumoPessoaResponse])
+@router.get("/resumo-pessoas/{mes}/{ano}", response_model=List[models.ResumoPessoaResponse])
 def resumo_pessoas(mes: int, ano: int, db: Session = Depends(get_db)):
     config = db.query(models.ConfiguracaoMes).filter(
         models.ConfiguracaoMes.mes == mes,
@@ -224,7 +360,7 @@ def resumo_pessoas(mes: int, ano: int, db: Session = Depends(get_db)):
         for r in result
     ]
 
-@app.get("/dias-com-presenca/{mes}/{ano}")
+@router.get("/dias-com-presenca/{mes}/{ano}")
 def dias_com_presenca(mes: int, ano: int, db: Session = Depends(get_db)):
     dias = db.query(
         func.distinct(extract('day', models.Presenca.data)).label('dia')
@@ -236,13 +372,8 @@ def dias_com_presenca(mes: int, ano: int, db: Session = Depends(get_db)):
     
     return [int(d.dia) for d in dias]
 
-@app.get("/")
-def root():
-    return {"message": "AliMentto API"}
-
-
-# Export entire database as JSON
-@app.get("/export")
+# BACKUP
+@router.get("/export")
 def export_db(db: Session = Depends(get_db)):
     pessoas = db.query(models.Pessoa).order_by(models.Pessoa.id).all()
     configuracoes = db.query(models.ConfiguracaoMes).order_by(models.ConfiguracaoMes.id).all()
@@ -266,8 +397,7 @@ def export_db(db: Session = Depends(get_db)):
     return payload
 
 
-# Import entire DB from JSON file (multipart form upload)
-@app.post("/import")
+@router.post("/import")
 def import_db(file: UploadFile = File(...), db: Session = Depends(get_db)):
     content = file.file.read()
     try:
@@ -276,22 +406,18 @@ def import_db(file: UploadFile = File(...), db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=f"Invalid JSON: {e}")
 
     try:
-        # Truncate and reset identities
         db.execute(text("TRUNCATE TABLE presencas, pessoas, configuracoes_mes RESTART IDENTITY CASCADE;"))
 
-        # Insert pessoas (preserve ids)
         for p in data.get("pessoas", []):
             pessoa = models.Pessoa(id=p.get("id"), nome=p.get("nome"), ativo=p.get("ativo", True))
             db.add(pessoa)
 
-        # Insert configuracoes
         for c in data.get("configuracoes_mes", []):
             cfg = models.ConfiguracaoMes(id=c.get("id"), mes=c.get("mes"), ano=c.get("ano"), valor_almoco=c.get("valor_almoco", 0.0))
             db.add(cfg)
 
         db.commit()
 
-        # Insert presencas (dates)
         for pr in data.get("presencas", []):
             data_str = pr.get("data")
             dt = datetime.fromisoformat(data_str).date() if data_str else None
@@ -300,7 +426,6 @@ def import_db(file: UploadFile = File(...), db: Session = Depends(get_db)):
 
         db.commit()
 
-        # Ensure sequences are set to max(id)
         db.execute(text("SELECT setval(pg_get_serial_sequence('pessoas','id'), COALESCE((SELECT MAX(id) FROM pessoas), 1), true);"))
         db.execute(text("SELECT setval(pg_get_serial_sequence('configuracoes_mes','id'), COALESCE((SELECT MAX(id) FROM configuracoes_mes), 1), true);"))
         db.execute(text("SELECT setval(pg_get_serial_sequence('presencas','id'), COALESCE((SELECT MAX(id) FROM presencas), 1), true);"))
@@ -311,3 +436,6 @@ def import_db(file: UploadFile = File(...), db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Import failed: {e}")
 
     return {"message": "Import successful"}
+
+
+app.include_router(router)
