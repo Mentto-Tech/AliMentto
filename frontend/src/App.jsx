@@ -10,6 +10,7 @@ import GerenciarUsuarios from './components/gerenciarUsuarios/GerenciarUsuarios'
 import HistoricoConfiguracoes from './components/historicoConfiguracoes/HistoricoConfiguracoes'
 import BackupRestore from './components/backup/BackupRestore'
 import Login from './components/login/Login'
+import AlterarSenha from './components/configuracoes/AlterarSenha'
 import { FaUsers, FaHistory } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { useApi } from './context/ApiContext'
@@ -43,9 +44,19 @@ function Dashboard() {
           <strong>AliMentto</strong>
           <p>Controle de Almoços</p>
         </div>
-        <button className='btn-logout' onClick={handleLogout} title="Sair">
-          <FiLogOut /> Sair
-        </button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button 
+            className='btn-logout' 
+            onClick={() => navigate('/alterar-senha')} 
+            title="Configurações"
+            style={{ background: '#2196F3' }}
+          >
+            ⚙️ Senha
+          </button>
+          <button className='btn-logout' onClick={handleLogout} title="Sair">
+            <FiLogOut /> Sair
+          </button>
+        </div>
       </header>
 
       <div className="App">
@@ -96,6 +107,11 @@ function App() {
       <Route path="/" element={
         <PrivateRoute>
           <Dashboard />
+        </PrivateRoute>
+      } />
+      <Route path="/alterar-senha" element={
+        <PrivateRoute>
+          <AlterarSenha />
         </PrivateRoute>
       } />
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -22,7 +22,11 @@ function ResumoMes({ selectedDate, refreshTrigger }) {
         // Buscar resumo por pessoa
         request(`/resumo-pessoas/${mes}/${ano}`)
             .then(r => r.json())
-            .then(data => setPessoas(data))
+            .then(data => {
+                // Ordenar por total de almoços (do maior para o menor)
+                const ordenado = data.sort((a, b) => b.total_almocos - a.total_almocos);
+                setPessoas(ordenado);
+            })
             .catch(error => console.error('Erro ao buscar resumo por pessoa:', error));
     }, [selectedDate, refreshTrigger]);
 
