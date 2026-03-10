@@ -24,7 +24,7 @@ function ResumoMes({ selectedDate, refreshTrigger }) {
             .then(r => r.json())
             .then(data => {
                 // Ordenar por total de almoços (do maior para o menor)
-                const ordenado = data.sort((a, b) => b.total_almocos - a.total_almocos);
+                const ordenado = [...data].sort((a, b) => b.total_almocos - a.total_almocos);
                 setPessoas(ordenado);
             })
             .catch(error => console.error('Erro ao buscar resumo por pessoa:', error));
