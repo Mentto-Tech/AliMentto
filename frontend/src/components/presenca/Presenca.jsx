@@ -8,7 +8,7 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
 
     const [presencas, setPresencas] = useState([]);
     const [nome, setNome] = useState('');
-    const [sortOrder, setSortOrder] = useState(null); // null = sem ordenação, 'desc' = mais para menos, 'asc' = menos para mais
+    const [sortOrder, setSortOrder] = useState('desc'); // null = sem ordenação, 'desc' = mais para menos, 'asc' = menos para mais
     const [resumoMensal, setResumoMensal] = useState([]);
     const { request } = useApi()
 
