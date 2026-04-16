@@ -10,13 +10,16 @@ export function ApiProvider({ children }) {
   const endLoading = useCallback(() => setLoadingCount(c => Math.max(0, c - 1)), [])
 
   // wrapper around apiFetch that toggles global loading
+  // passe cfg.showLoader = false para chamadas silenciosas
   const request = useCallback(async (path, opts = {}, cfg = {}) => {
-    beginLoading()
+    const shouldShowLoader = cfg.showLoader !== false
+
+    if (shouldShowLoader) beginLoading()
     try {
       const res = await apiFetch(path, opts, cfg)
       return res
     } finally {
-      endLoading()
+      if (shouldShowLoader) endLoading()
     }
   }, [beginLoading, endLoading])
 

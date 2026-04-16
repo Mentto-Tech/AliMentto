@@ -14,13 +14,13 @@ function ResumoMes({ selectedDate, refreshTrigger }) {
         const ano = selectedDate.getFullYear();
 
         // Buscar resumo total
-        request(`/resumo/${mes}/${ano}`)
+        request(`/resumo/${mes}/${ano}`, {}, { showLoader: false })
             .then(r => r.json())
             .then(data => setResumo(data))
             .catch(error => console.error('Erro ao buscar resumo:', error));
 
         // Buscar resumo por pessoa
-        request(`/resumo-pessoas/${mes}/${ano}`)
+        request(`/resumo-pessoas/${mes}/${ano}`, {}, { showLoader: false })
             .then(r => r.json())
             .then(data => {
                 // Ordenar por total de almoços (do maior para o menor)
