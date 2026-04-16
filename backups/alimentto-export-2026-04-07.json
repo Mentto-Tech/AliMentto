@@ -1,0 +1,1660 @@
+{
+  "pessoas": [
+    {
+      "id": 1,
+      "nome": "Luis",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 2,
+      "nome": "Victor",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 3,
+      "nome": "Tiago",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 4,
+      "nome": "Hugo",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 5,
+      "nome": "Chris",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 7,
+      "nome": "Fernanda",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 8,
+      "nome": "Isabelly",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 9,
+      "nome": "Luana",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 11,
+      "nome": "Sarah",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    },
+    {
+      "id": 13,
+      "nome": "Raissa",
+      "ativo": true,
+      "criado_em": "2026-03-13T10:58:38.254408"
+    }
+  ],
+  "configuracoes_mes": [
+    {
+      "id": 1,
+      "mes": 1,
+      "ano": 2026,
+      "valor_almoco": 13.51
+    },
+    {
+      "id": 2,
+      "mes": 2,
+      "ano": 2026,
+      "valor_almoco": 13.51
+    },
+    {
+      "id": 3,
+      "mes": 3,
+      "ano": 2026,
+      "valor_almoco": 13.51
+    },
+    {
+      "id": 4,
+      "mes": 4,
+      "ano": 2026,
+      "valor_almoco": 13.51
+    }
+  ],
+  "presencas": [
+    {
+      "id": 1,
+      "pessoa_id": 7,
+      "data": "2026-02-03",
+      "almocou": false,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 2,
+      "pessoa_id": 4,
+      "data": "2026-02-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 3,
+      "pessoa_id": 7,
+      "data": "2026-02-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 4,
+      "pessoa_id": 5,
+      "data": "2026-02-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 5,
+      "pessoa_id": 7,
+      "data": "2026-01-07",
+      "almocou": false,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 6,
+      "pessoa_id": 4,
+      "data": "2026-01-07",
+      "almocou": false,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 7,
+      "pessoa_id": 5,
+      "data": "2026-01-07",
+      "almocou": false,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 9,
+      "pessoa_id": 9,
+      "data": "2026-02-02",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 10,
+      "pessoa_id": 8,
+      "data": "2026-02-02",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 11,
+      "pessoa_id": 1,
+      "data": "2026-02-02",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 12,
+      "pessoa_id": 2,
+      "data": "2026-02-02",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 13,
+      "pessoa_id": 1,
+      "data": "2026-01-27",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 14,
+      "pessoa_id": 2,
+      "data": "2026-01-27",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 15,
+      "pessoa_id": 9,
+      "data": "2026-01-27",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 16,
+      "pessoa_id": 8,
+      "data": "2026-01-27",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 17,
+      "pessoa_id": 7,
+      "data": "2026-01-27",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 18,
+      "pessoa_id": 7,
+      "data": "2026-01-26",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 19,
+      "pessoa_id": 8,
+      "data": "2026-01-26",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 20,
+      "pessoa_id": 9,
+      "data": "2026-01-26",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 21,
+      "pessoa_id": 2,
+      "data": "2026-01-26",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 22,
+      "pessoa_id": 1,
+      "data": "2026-01-28",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 23,
+      "pessoa_id": 2,
+      "data": "2026-01-28",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 24,
+      "pessoa_id": 4,
+      "data": "2026-01-28",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 25,
+      "pessoa_id": 7,
+      "data": "2026-01-28",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 26,
+      "pessoa_id": 8,
+      "data": "2026-01-28",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 27,
+      "pessoa_id": 9,
+      "data": "2026-01-28",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 28,
+      "pessoa_id": 1,
+      "data": "2026-01-29",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 29,
+      "pessoa_id": 9,
+      "data": "2026-01-29",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 30,
+      "pessoa_id": 2,
+      "data": "2026-01-29",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 31,
+      "pessoa_id": 8,
+      "data": "2026-01-29",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 32,
+      "pessoa_id": 8,
+      "data": "2026-01-30",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 33,
+      "pessoa_id": 9,
+      "data": "2026-01-30",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 34,
+      "pessoa_id": 1,
+      "data": "2026-01-30",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 35,
+      "pessoa_id": 2,
+      "data": "2026-01-30",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 36,
+      "pessoa_id": 9,
+      "data": "2026-02-03",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 37,
+      "pessoa_id": 1,
+      "data": "2026-02-03",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 38,
+      "pessoa_id": 2,
+      "data": "2026-02-03",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 39,
+      "pessoa_id": 8,
+      "data": "2026-02-04",
+      "almocou": false,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 40,
+      "pessoa_id": 9,
+      "data": "2026-02-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 41,
+      "pessoa_id": 1,
+      "data": "2026-02-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 42,
+      "pessoa_id": 8,
+      "data": "2026-02-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 43,
+      "pessoa_id": 9,
+      "data": "2026-02-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 44,
+      "pessoa_id": 1,
+      "data": "2026-02-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 45,
+      "pessoa_id": 2,
+      "data": "2026-02-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 46,
+      "pessoa_id": 8,
+      "data": "2026-02-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 47,
+      "pessoa_id": 9,
+      "data": "2026-02-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 48,
+      "pessoa_id": 1,
+      "data": "2026-02-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 49,
+      "pessoa_id": 2,
+      "data": "2026-02-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 50,
+      "pessoa_id": 2,
+      "data": "2026-02-09",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 51,
+      "pessoa_id": 1,
+      "data": "2026-02-09",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 52,
+      "pessoa_id": 9,
+      "data": "2026-02-09",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 53,
+      "pessoa_id": 8,
+      "data": "2026-02-09",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 54,
+      "pessoa_id": 9,
+      "data": "2026-02-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 55,
+      "pessoa_id": 1,
+      "data": "2026-02-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 56,
+      "pessoa_id": 2,
+      "data": "2026-02-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 57,
+      "pessoa_id": 8,
+      "data": "2026-02-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 58,
+      "pessoa_id": 11,
+      "data": "2026-02-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 59,
+      "pessoa_id": 3,
+      "data": "2026-02-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 60,
+      "pessoa_id": 5,
+      "data": "2026-02-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 61,
+      "pessoa_id": 7,
+      "data": "2026-02-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 62,
+      "pessoa_id": 4,
+      "data": "2026-02-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 63,
+      "pessoa_id": 8,
+      "data": "2026-02-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 64,
+      "pessoa_id": 9,
+      "data": "2026-02-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 65,
+      "pessoa_id": 1,
+      "data": "2026-02-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 66,
+      "pessoa_id": 2,
+      "data": "2026-02-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 67,
+      "pessoa_id": 9,
+      "data": "2026-02-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 68,
+      "pessoa_id": 1,
+      "data": "2026-02-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 69,
+      "pessoa_id": 8,
+      "data": "2026-02-12",
+      "almocou": false,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 70,
+      "pessoa_id": 2,
+      "data": "2026-02-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 71,
+      "pessoa_id": 8,
+      "data": "2026-02-13",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 72,
+      "pessoa_id": 1,
+      "data": "2026-02-13",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 73,
+      "pessoa_id": 9,
+      "data": "2026-02-13",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 74,
+      "pessoa_id": 11,
+      "data": "2026-02-13",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 75,
+      "pessoa_id": 3,
+      "data": "2026-02-13",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 76,
+      "pessoa_id": 8,
+      "data": "2026-02-18",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 77,
+      "pessoa_id": 9,
+      "data": "2026-02-19",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 78,
+      "pessoa_id": 1,
+      "data": "2026-02-19",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 79,
+      "pessoa_id": 2,
+      "data": "2026-02-19",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 80,
+      "pessoa_id": 8,
+      "data": "2026-02-19",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 81,
+      "pessoa_id": 7,
+      "data": "2026-02-20",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 82,
+      "pessoa_id": 8,
+      "data": "2026-02-20",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 83,
+      "pessoa_id": 9,
+      "data": "2026-02-20",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 84,
+      "pessoa_id": 1,
+      "data": "2026-02-20",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 85,
+      "pessoa_id": 2,
+      "data": "2026-02-20",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 86,
+      "pessoa_id": 5,
+      "data": "2026-02-23",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 87,
+      "pessoa_id": 7,
+      "data": "2026-02-23",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 88,
+      "pessoa_id": 4,
+      "data": "2026-02-23",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 89,
+      "pessoa_id": 8,
+      "data": "2026-02-23",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 90,
+      "pessoa_id": 9,
+      "data": "2026-02-23",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 91,
+      "pessoa_id": 1,
+      "data": "2026-02-23",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 92,
+      "pessoa_id": 2,
+      "data": "2026-02-23",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 93,
+      "pessoa_id": 8,
+      "data": "2026-02-24",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 94,
+      "pessoa_id": 9,
+      "data": "2026-02-24",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 95,
+      "pessoa_id": 1,
+      "data": "2026-02-24",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 96,
+      "pessoa_id": 11,
+      "data": "2026-02-24",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 97,
+      "pessoa_id": 3,
+      "data": "2026-02-24",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 98,
+      "pessoa_id": 2,
+      "data": "2026-02-24",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 99,
+      "pessoa_id": 9,
+      "data": "2026-02-26",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 100,
+      "pessoa_id": 1,
+      "data": "2026-02-26",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 101,
+      "pessoa_id": 2,
+      "data": "2026-02-26",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 102,
+      "pessoa_id": 1,
+      "data": "2026-02-25",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 103,
+      "pessoa_id": 2,
+      "data": "2026-02-25",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 104,
+      "pessoa_id": 9,
+      "data": "2026-02-25",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 105,
+      "pessoa_id": 8,
+      "data": "2026-02-25",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 106,
+      "pessoa_id": 4,
+      "data": "2026-02-25",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 107,
+      "pessoa_id": 9,
+      "data": "2026-02-27",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 108,
+      "pessoa_id": 1,
+      "data": "2026-02-27",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 109,
+      "pessoa_id": 2,
+      "data": "2026-02-27",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 110,
+      "pessoa_id": 8,
+      "data": "2026-03-02",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 111,
+      "pessoa_id": 9,
+      "data": "2026-03-02",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 112,
+      "pessoa_id": 2,
+      "data": "2026-03-02",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 113,
+      "pessoa_id": 1,
+      "data": "2026-03-02",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 114,
+      "pessoa_id": 8,
+      "data": "2026-03-03",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 115,
+      "pessoa_id": 9,
+      "data": "2026-03-03",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 116,
+      "pessoa_id": 1,
+      "data": "2026-03-03",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 117,
+      "pessoa_id": 11,
+      "data": "2026-03-03",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 118,
+      "pessoa_id": 2,
+      "data": "2026-03-03",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 119,
+      "pessoa_id": 4,
+      "data": "2026-03-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 120,
+      "pessoa_id": 8,
+      "data": "2026-03-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 121,
+      "pessoa_id": 9,
+      "data": "2026-03-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 122,
+      "pessoa_id": 1,
+      "data": "2026-03-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 123,
+      "pessoa_id": 2,
+      "data": "2026-03-04",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 124,
+      "pessoa_id": 1,
+      "data": "2026-03-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 125,
+      "pessoa_id": 9,
+      "data": "2026-03-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 126,
+      "pessoa_id": 8,
+      "data": "2026-03-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 127,
+      "pessoa_id": 2,
+      "data": "2026-03-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 128,
+      "pessoa_id": 3,
+      "data": "2026-03-05",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 129,
+      "pessoa_id": 1,
+      "data": "2026-03-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 130,
+      "pessoa_id": 2,
+      "data": "2026-03-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 131,
+      "pessoa_id": 9,
+      "data": "2026-03-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 132,
+      "pessoa_id": 8,
+      "data": "2026-03-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 133,
+      "pessoa_id": 7,
+      "data": "2026-03-06",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 134,
+      "pessoa_id": 8,
+      "data": "2026-03-09",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 135,
+      "pessoa_id": 9,
+      "data": "2026-03-09",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 136,
+      "pessoa_id": 1,
+      "data": "2026-03-09",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 137,
+      "pessoa_id": 2,
+      "data": "2026-03-09",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 138,
+      "pessoa_id": 11,
+      "data": "2026-03-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 139,
+      "pessoa_id": 3,
+      "data": "2026-03-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 140,
+      "pessoa_id": 1,
+      "data": "2026-03-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 141,
+      "pessoa_id": 9,
+      "data": "2026-03-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 142,
+      "pessoa_id": 2,
+      "data": "2026-03-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 143,
+      "pessoa_id": 8,
+      "data": "2026-03-10",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 144,
+      "pessoa_id": 2,
+      "data": "2026-03-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 145,
+      "pessoa_id": 1,
+      "data": "2026-03-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 146,
+      "pessoa_id": 9,
+      "data": "2026-03-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 147,
+      "pessoa_id": 8,
+      "data": "2026-03-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 148,
+      "pessoa_id": 4,
+      "data": "2026-03-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 149,
+      "pessoa_id": 7,
+      "data": "2026-03-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 150,
+      "pessoa_id": 5,
+      "data": "2026-03-11",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 151,
+      "pessoa_id": 8,
+      "data": "2026-03-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 152,
+      "pessoa_id": 9,
+      "data": "2026-03-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 153,
+      "pessoa_id": 1,
+      "data": "2026-03-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 154,
+      "pessoa_id": 2,
+      "data": "2026-03-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 155,
+      "pessoa_id": 7,
+      "data": "2026-03-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 156,
+      "pessoa_id": 5,
+      "data": "2026-03-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 157,
+      "pessoa_id": 3,
+      "data": "2026-03-12",
+      "almocou": true,
+      "criado_em": "2026-03-13T10:58:38.692710"
+    },
+    {
+      "id": 158,
+      "pessoa_id": 1,
+      "data": "2026-03-13",
+      "almocou": true,
+      "criado_em": "2026-03-14T15:31:32.947556"
+    },
+    {
+      "id": 159,
+      "pessoa_id": 9,
+      "data": "2026-03-13",
+      "almocou": true,
+      "criado_em": "2026-03-14T15:31:35.098588"
+    },
+    {
+      "id": 160,
+      "pessoa_id": 8,
+      "data": "2026-03-13",
+      "almocou": true,
+      "criado_em": "2026-03-14T15:31:37.263292"
+    },
+    {
+      "id": 161,
+      "pessoa_id": 2,
+      "data": "2026-03-13",
+      "almocou": true,
+      "criado_em": "2026-03-14T15:31:39.483206"
+    },
+    {
+      "id": 162,
+      "pessoa_id": 8,
+      "data": "2026-03-16",
+      "almocou": true,
+      "criado_em": "2026-03-16T20:02:31.852282"
+    },
+    {
+      "id": 163,
+      "pessoa_id": 9,
+      "data": "2026-03-16",
+      "almocou": true,
+      "criado_em": "2026-03-16T20:02:34.318049"
+    },
+    {
+      "id": 164,
+      "pessoa_id": 1,
+      "data": "2026-03-16",
+      "almocou": true,
+      "criado_em": "2026-03-16T20:02:36.713673"
+    },
+    {
+      "id": 165,
+      "pessoa_id": 2,
+      "data": "2026-03-16",
+      "almocou": true,
+      "criado_em": "2026-03-16T20:02:39.194111"
+    },
+    {
+      "id": 166,
+      "pessoa_id": 8,
+      "data": "2026-03-20",
+      "almocou": false,
+      "criado_em": "2026-03-20T10:30:03.814352"
+    },
+    {
+      "id": 167,
+      "pessoa_id": 9,
+      "data": "2026-03-20",
+      "almocou": false,
+      "criado_em": "2026-03-20T10:30:06.223601"
+    },
+    {
+      "id": 168,
+      "pessoa_id": 1,
+      "data": "2026-03-20",
+      "almocou": false,
+      "criado_em": "2026-03-20T10:30:08.523558"
+    },
+    {
+      "id": 169,
+      "pessoa_id": 2,
+      "data": "2026-03-20",
+      "almocou": false,
+      "criado_em": "2026-03-20T10:30:10.736976"
+    },
+    {
+      "id": 170,
+      "pessoa_id": 9,
+      "data": "2026-03-19",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:19.166318"
+    },
+    {
+      "id": 171,
+      "pessoa_id": 1,
+      "data": "2026-03-19",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:21.430880"
+    },
+    {
+      "id": 172,
+      "pessoa_id": 2,
+      "data": "2026-03-19",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:23.676752"
+    },
+    {
+      "id": 173,
+      "pessoa_id": 9,
+      "data": "2026-03-18",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:37.626504"
+    },
+    {
+      "id": 174,
+      "pessoa_id": 1,
+      "data": "2026-03-18",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:39.980305"
+    },
+    {
+      "id": 175,
+      "pessoa_id": 2,
+      "data": "2026-03-18",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:42.422048"
+    },
+    {
+      "id": 176,
+      "pessoa_id": 8,
+      "data": "2026-03-18",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:44.683103"
+    },
+    {
+      "id": 177,
+      "pessoa_id": 7,
+      "data": "2026-03-18",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:46.958968"
+    },
+    {
+      "id": 178,
+      "pessoa_id": 5,
+      "data": "2026-03-18",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:51.799725"
+    },
+    {
+      "id": 179,
+      "pessoa_id": 4,
+      "data": "2026-03-18",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:30:54.174076"
+    },
+    {
+      "id": 180,
+      "pessoa_id": 9,
+      "data": "2026-03-17",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:31:20.545556"
+    },
+    {
+      "id": 181,
+      "pessoa_id": 1,
+      "data": "2026-03-17",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:31:22.965395"
+    },
+    {
+      "id": 182,
+      "pessoa_id": 2,
+      "data": "2026-03-17",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:31:24.952462"
+    },
+    {
+      "id": 183,
+      "pessoa_id": 8,
+      "data": "2026-03-17",
+      "almocou": true,
+      "criado_em": "2026-03-20T10:31:27.437791"
+    },
+    {
+      "id": 184,
+      "pessoa_id": 1,
+      "data": "2026-03-23",
+      "almocou": true,
+      "criado_em": "2026-03-23T15:25:41.824201"
+    },
+    {
+      "id": 185,
+      "pessoa_id": 2,
+      "data": "2026-03-23",
+      "almocou": true,
+      "criado_em": "2026-03-23T15:25:45.514559"
+    },
+    {
+      "id": 186,
+      "pessoa_id": 8,
+      "data": "2026-03-23",
+      "almocou": true,
+      "criado_em": "2026-03-23T15:25:47.859259"
+    },
+    {
+      "id": 187,
+      "pessoa_id": 9,
+      "data": "2026-03-23",
+      "almocou": true,
+      "criado_em": "2026-03-23T15:25:50.205913"
+    },
+    {
+      "id": 188,
+      "pessoa_id": 9,
+      "data": "2026-03-24",
+      "almocou": true,
+      "criado_em": "2026-03-24T15:31:02.332776"
+    },
+    {
+      "id": 189,
+      "pessoa_id": 1,
+      "data": "2026-03-24",
+      "almocou": true,
+      "criado_em": "2026-03-24T15:31:04.615889"
+    },
+    {
+      "id": 190,
+      "pessoa_id": 2,
+      "data": "2026-03-24",
+      "almocou": true,
+      "criado_em": "2026-03-24T15:31:06.772320"
+    },
+    {
+      "id": 191,
+      "pessoa_id": 8,
+      "data": "2026-03-24",
+      "almocou": true,
+      "criado_em": "2026-03-24T15:31:09.032593"
+    },
+    {
+      "id": 192,
+      "pessoa_id": 5,
+      "data": "2026-03-24",
+      "almocou": true,
+      "criado_em": "2026-03-24T15:41:08.443702"
+    },
+    {
+      "id": 193,
+      "pessoa_id": 9,
+      "data": "2026-03-25",
+      "almocou": true,
+      "criado_em": "2026-03-25T15:53:10.375654"
+    },
+    {
+      "id": 194,
+      "pessoa_id": 1,
+      "data": "2026-03-25",
+      "almocou": true,
+      "criado_em": "2026-03-25T15:53:12.690750"
+    },
+    {
+      "id": 195,
+      "pessoa_id": 2,
+      "data": "2026-03-25",
+      "almocou": true,
+      "criado_em": "2026-03-25T15:53:18.507142"
+    },
+    {
+      "id": 196,
+      "pessoa_id": 7,
+      "data": "2026-03-25",
+      "almocou": true,
+      "criado_em": "2026-03-25T15:53:22.311647"
+    },
+    {
+      "id": 197,
+      "pessoa_id": 4,
+      "data": "2026-03-25",
+      "almocou": true,
+      "criado_em": "2026-03-25T15:53:25.635234"
+    },
+    {
+      "id": 198,
+      "pessoa_id": 9,
+      "data": "2026-03-26",
+      "almocou": true,
+      "criado_em": "2026-03-27T10:33:59.749223"
+    },
+    {
+      "id": 199,
+      "pessoa_id": 2,
+      "data": "2026-03-26",
+      "almocou": true,
+      "criado_em": "2026-03-27T10:34:01.906570"
+    },
+    {
+      "id": 200,
+      "pessoa_id": 8,
+      "data": "2026-03-26",
+      "almocou": true,
+      "criado_em": "2026-03-27T10:34:03.891366"
+    },
+    {
+      "id": 201,
+      "pessoa_id": 9,
+      "data": "2026-03-30",
+      "almocou": true,
+      "criado_em": "2026-03-30T17:51:28.100348"
+    },
+    {
+      "id": 202,
+      "pessoa_id": 2,
+      "data": "2026-03-30",
+      "almocou": true,
+      "criado_em": "2026-03-30T17:51:30.495229"
+    },
+    {
+      "id": 203,
+      "pessoa_id": 1,
+      "data": "2026-03-30",
+      "almocou": true,
+      "criado_em": "2026-03-30T17:51:32.588045"
+    },
+    {
+      "id": 204,
+      "pessoa_id": 8,
+      "data": "2026-03-30",
+      "almocou": true,
+      "criado_em": "2026-03-30T17:51:34.835206"
+    },
+    {
+      "id": 205,
+      "pessoa_id": 9,
+      "data": "2026-03-31",
+      "almocou": true,
+      "criado_em": "2026-04-01T01:36:40.638238"
+    },
+    {
+      "id": 206,
+      "pessoa_id": 2,
+      "data": "2026-03-31",
+      "almocou": true,
+      "criado_em": "2026-04-01T01:36:43.196179"
+    },
+    {
+      "id": 207,
+      "pessoa_id": 1,
+      "data": "2026-03-31",
+      "almocou": true,
+      "criado_em": "2026-04-01T01:36:45.334858"
+    },
+    {
+      "id": 208,
+      "pessoa_id": 8,
+      "data": "2026-03-31",
+      "almocou": true,
+      "criado_em": "2026-04-01T01:36:47.528651"
+    },
+    {
+      "id": 209,
+      "pessoa_id": 3,
+      "data": "2026-03-31",
+      "almocou": true,
+      "criado_em": "2026-04-01T01:36:52.354489"
+    },
+    {
+      "id": 210,
+      "pessoa_id": 11,
+      "data": "2026-03-31",
+      "almocou": true,
+      "criado_em": "2026-04-01T01:36:54.436339"
+    },
+    {
+      "id": 211,
+      "pessoa_id": 13,
+      "data": "2026-03-31",
+      "almocou": true,
+      "criado_em": "2026-04-01T01:36:58.047593"
+    },
+    {
+      "id": 212,
+      "pessoa_id": 8,
+      "data": "2026-04-06",
+      "almocou": true,
+      "criado_em": "2026-04-07T10:42:54.435135"
+    },
+    {
+      "id": 213,
+      "pessoa_id": 9,
+      "data": "2026-04-06",
+      "almocou": true,
+      "criado_em": "2026-04-07T10:43:07.241433"
+    },
+    {
+      "id": 214,
+      "pessoa_id": 1,
+      "data": "2026-04-06",
+      "almocou": true,
+      "criado_em": "2026-04-07T10:43:32.102106"
+    },
+    {
+      "id": 215,
+      "pessoa_id": 2,
+      "data": "2026-04-06",
+      "almocou": true,
+      "criado_em": "2026-04-07T10:43:36.026869"
+    },
+    {
+      "id": 216,
+      "pessoa_id": 8,
+      "data": "2026-04-02",
+      "almocou": true,
+      "criado_em": "2026-04-07T10:43:52.082765"
+    },
+    {
+      "id": 217,
+      "pessoa_id": 9,
+      "data": "2026-04-02",
+      "almocou": true,
+      "criado_em": "2026-04-07T10:43:54.878915"
+    },
+    {
+      "id": 218,
+      "pessoa_id": 1,
+      "data": "2026-04-02",
+      "almocou": true,
+      "criado_em": "2026-04-07T10:43:57.875659"
+    },
+    {
+      "id": 219,
+      "pessoa_id": 2,
+      "data": "2026-04-02",
+      "almocou": true,
+      "criado_em": "2026-04-07T10:43:59.923143"
+    },
+    {
+      "id": 220,
+      "pessoa_id": 8,
+      "data": "2026-04-07",
+      "almocou": true,
+      "criado_em": "2026-04-07T15:45:12.119987"
+    },
+    {
+      "id": 221,
+      "pessoa_id": 9,
+      "data": "2026-04-07",
+      "almocou": true,
+      "criado_em": "2026-04-07T15:45:14.487509"
+    },
+    {
+      "id": 222,
+      "pessoa_id": 1,
+      "data": "2026-04-07",
+      "almocou": true,
+      "criado_em": "2026-04-07T15:45:16.594536"
+    },
+    {
+      "id": 223,
+      "pessoa_id": 2,
+      "data": "2026-04-07",
+      "almocou": true,
+      "criado_em": "2026-04-07T15:45:18.715215"
+    },
+    {
+      "id": 224,
+      "pessoa_id": 3,
+      "data": "2026-04-07",
+      "almocou": true,
+      "criado_em": "2026-04-07T15:45:24.774117"
+    },
+    {
+      "id": 225,
+      "pessoa_id": 11,
+      "data": "2026-04-07",
+      "almocou": true,
+      "criado_em": "2026-04-07T15:45:26.999219"
+    }
+  ]
+}

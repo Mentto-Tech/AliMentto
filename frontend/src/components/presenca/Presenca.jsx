@@ -109,9 +109,13 @@ function Presenca ({ selectedDate, onPresencaUpdate }) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ pessoa_id: pessoaId, data: dateStr, almocou: !almocou })
-        })
-        
-        carregarPresencas();
+        });
+
+        // Atualizar o estado localmente sem recarregar toda a lista
+        setPresencas(prevPresencas => prevPresencas.map(p => 
+            p.id === pessoaId ? { ...p, almocou: !almocou } : p
+        ));
+
         if (onPresencaUpdate) {
             onPresencaUpdate();
         }
