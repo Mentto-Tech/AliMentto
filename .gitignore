@@ -15,3 +15,5 @@ __pycache__
 .coverage
 htmlcov
 DEPLOY_RENDER.md
+Alimentto.md
+backups

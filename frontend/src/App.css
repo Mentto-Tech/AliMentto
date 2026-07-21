@@ -113,3 +113,34 @@
   color: #ff8861;
   border-color: #ff9b7a;
 }
+
+/* Footer */
+
+.app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.2rem 2vw;
+  margin-top: 2rem;
+  border-top: 1px solid #f0ebe8;
+  font-size: 0.78rem;
+  color: #a8998f;
+}
+
+.footer-sep {
+  color: #d4c8c2;
+  font-size: 1rem;
+}
+
+.app-footer a {
+  color: #ff9b7a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.app-footer a:hover {
+  color: #ff8861;
+  text-decoration: underline;
+}

@@ -84,6 +84,20 @@ function Dashboard() {
         </div>
       </div>
 
+      <footer className="app-footer">
+        <span>
+          Os dados de presença são retidos por <strong>5 anos</strong>, conforme obrigação trabalhista e contábil.
+        </span>
+        <span className="footer-sep">·</span>
+        <a
+          href="https://mentto.com.br/termos-de-uso-e-politicas-de-privacidade"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Política de Privacidade
+        </a>
+      </footer>
+
       <GerenciarUsuarios 
         isOpen={modalUsuarios} 
         onClose={() => setModalUsuarios(false)}
