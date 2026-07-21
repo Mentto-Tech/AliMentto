@@ -96,6 +96,13 @@ function Dashboard() {
         >
           Política de Privacidade
         </a>
+        <span className="footer-sep">·</span>
+        <a
+          href="/Plano-Resposta-Incidentes-LGPD.pdf"
+          download
+        >
+          Plano de Incidentes (PDF)
+        </a>
       </footer>
 
       <GerenciarUsuarios 
