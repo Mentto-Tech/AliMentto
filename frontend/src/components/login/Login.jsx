@@ -6,7 +6,7 @@ import './Login.css'
 const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 export default function Login() {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -20,7 +20,7 @@ export default function Login() {
       const res = await fetch(`${API}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       })
       if (!res.ok) {
         setError('Usuário ou senha inválidos')
@@ -46,10 +46,10 @@ export default function Login() {
         <form className="login-form" onSubmit={handleSubmit}>
           <input
             className="login-input"
-            type="text"
-            placeholder="Usuário"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
             autoComplete="username"
             required
           />
