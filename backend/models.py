@@ -102,16 +102,17 @@ class ResumoPessoaResponse(BaseModel):
 # ── Auth ──────────────────────────────────────────────────
 
 class Usuario(Base):
-    __tablename__ = "usuarios"
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    username = Column(String(50), unique=True, nullable=False, index=True)
-    senha_hash = Column(String(255), nullable=False)
-    criado_em = Column(TIMESTAMP, server_default=func.now())
+    email = Column(String(150), unique=True, nullable=False, index=True)
+    full_name = Column(String(100), nullable=True)
+    hashed_password = Column(String(255), nullable=False)
+    criado_em = Column('created_at', TIMESTAMP, server_default=func.now())
 
 
 class LoginRequest(BaseModel):
-    username: str
+    email: str
     password: str
 
 
@@ -122,7 +123,7 @@ class TokenResponse(BaseModel):
 
 class UsuarioInfo(BaseModel):
     id: int
-    username: str
+    email: str
 
     class Config:
         from_attributes = True

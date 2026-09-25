@@ -7,7 +7,10 @@ from datetime import date, datetime, timedelta
 from typing import List
 import json
 import os
+from dotenv import load_dotenv
 from sqlalchemy import text
+
+load_dotenv()
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 import bcrypt
@@ -44,12 +47,12 @@ async def get_current_user(
     )
     try:
         payload = jwt.decode(credentials.credentials, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
+        email: str = payload.get("sub")
+        if email is None:
             raise exc
     except JWTError:
         raise exc
-    usuario = db.query(models.Usuario).filter(models.Usuario.username == username).first()
+    usuario = db.query(models.Usuario).filter(models.Usuario.email == email).first()
     if usuario is None:
         raise exc
     return usuario
@@ -73,36 +76,37 @@ app.add_middleware(
 @app.on_event("startup")
 def create_default_admin():
     """
-    Cria automaticamente o usuário admin padrão se não existir nenhum usuário no banco.
-    Senha padrão: admin123 (DEVE SER ALTERADA após o primeiro login!)
+    Cria automaticamente o usuário admin usando variáveis de ambiente.
+    Para ambiente local, configure o arquivo .env ou variáveis de ambiente.
     """
     db = next(get_db())
     try:
-        # Verifica se já existe algum usuário
         usuario_count = db.query(models.Usuario).count()
         
         if usuario_count == 0:
-            # Credenciais padrão (ALTERE APÓS O PRIMEIRO LOGIN!)
-            default_username = "admin"
-            default_password = "admin123"
+            admin_email = os.getenv("ADMIN_EMAIL")
+            admin_password = os.getenv("ADMIN_PASSWORD")
+            admin_full_name = os.getenv("ADMIN_FULL_NAME", "Admin")
+
+            if not admin_email or not admin_password:
+                print("⚠️  AVISO: ADMIN_EMAIL e ADMIN_PASSWORD não foram configurados. Admin padrão não será criado.")
+                return
             
-            # Gera hash da senha
             salt = bcrypt.gensalt()
-            senha_hash = bcrypt.hashpw(default_password.encode('utf-8'), salt).decode('utf-8')
+            senha_hash = bcrypt.hashpw(admin_password.encode('utf-8'), salt).decode('utf-8')
             
-            # Cria o usuário admin
             novo_usuario = models.Usuario(
-                username=default_username,
-                senha_hash=senha_hash
+                email=admin_email,
+                full_name=admin_full_name,
+                hashed_password=senha_hash
             )
             db.add(novo_usuario)
             db.commit()
             
             print("=" * 60)
-            print("USUÁRIO ADMIN CRIADO COM SUCESSO!")
-            print(f"Username: {default_username}")
-            print(f"Senha: {default_password}")
-            print("⚠️  IMPORTANTE: Altere esta senha após o primeiro login!")
+            print("✅ USUÁRIO ADMIN CRIADO COM SUCESSO A PARTIR DE VARIÁVEIS DE AMBIENTE!")
+            print(f"E-mail: {admin_email}")
+            print(f"Nome: {admin_full_name}")
             print("=" * 60)
     except Exception as e:
         print(f"Erro ao criar usuário admin: {e}")
@@ -120,14 +124,14 @@ def root():
 
 @app.post("/auth/login", response_model=models.TokenResponse)
 def login(body: models.LoginRequest, db: Session = Depends(get_db)):
-    usuario = db.query(models.Usuario).filter(models.Usuario.username == body.username).first()
-    if not usuario or not pwd_context.verify(body.password, usuario.senha_hash):
+    usuario = db.query(models.Usuario).filter(models.Usuario.email == body.email).first()
+    if not usuario or not pwd_context.verify(body.password, usuario.hashed_password):
         raise HTTPException(
             status_code=401,
             detail="Usuário ou senha inválidos",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    token = create_access_token({"sub": usuario.username})
+    token = create_access_token({"sub": usuario.email})
     return {"access_token": token, "token_type": "bearer"}
 
 
@@ -144,7 +148,7 @@ def alterar_senha(
 ):
     """Permite ao usuário logado alterar sua própria senha."""
     # Verifica se a senha atual está correta
-    if not pwd_context.verify(body.senha_atual, current_user.senha_hash):
+    if not pwd_context.verify(body.senha_atual, current_user.hashed_password):
         raise HTTPException(status_code=400, detail="Senha atual incorreta")
     
     # Gera hash da nova senha
@@ -152,7 +156,7 @@ def alterar_senha(
     nova_senha_hash = bcrypt.hashpw(body.senha_nova.encode('utf-8'), salt).decode('utf-8')
     
     # Atualiza a senha
-    current_user.senha_hash = nova_senha_hash
+    current_user.hashed_password = nova_senha_hash
     db.commit()
     
     return {"message": "Senha alterada com sucesso"}
